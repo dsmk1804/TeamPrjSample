@@ -1,0 +1,28 @@
+
+
+.card {
+  display: block;
+  width: 18rem;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.maincon{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.image-up{
+    width: 60%;
+}
+.card-container{
+    width: 40%;
+}
+
+.card-container {
+  display: block;
+  margin-bottom: 20px;
+}

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>캐릭터-상품 매칭 서비스</title>
+
+    <script src="css/js/main.js"></script>
+
+    <!--    <link rel="stylesheet" href="/css/main.css">-->
+
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap JS (Optional, if you want to use dropdown functionality) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+
+
+        .card {
+          display: block;
+          width: 100%;
+        }
+
+        .flex-container {
+            display: flex;
+        }
+
+        .maincon{
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .image-up{
+            width: 60%;
+        }
+        .card-container{
+            width: 40%;
+        }
+
+        .card-container {
+          display: block;
+          margin-bottom: 20px;
+        }
+
+
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+        // 이미지 업로드
+        document.getElementById("imageUpload").addEventListener("change", function(e) {
+        const file = e.target.files[0];
+        if (file && file.type.startsWith("image/")) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+        const imagePreview = document.getElementById("imagePreview");
+        const deleteButton = document.getElementById("deleteImage");
+
+        imagePreview.src = event.target.result;
+        imagePreview.style.display = "block";
+        deleteButton.style.display = "block"; // Show delete button when an image is previewed
+        }
+        reader.readAsDataURL(file);
+        }
+        });
+
+        // Delete uploaded image
+        document.getElementById("deleteImage").addEventListener("click", function() {
+        const imagePreview = document.getElementById("imagePreview");
+        const deleteButton = document.getElementById("deleteImage");
+
+        imagePreview.src = "";
+        imagePreview.style.display = "none";
+        deleteButton.style.display = "none"; // Hide delete button after image deletion
+        });
+
+        // Dropdown menu show & hide
+        const categoryBtn = document.getElementById('categoryBtn');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+
+        function showDropdownMenu() {
+        dropdownMenu.style.display = 'block';
+        }
+
+        function hideDropdownMenu() {
+        dropdownMenu.style.display = 'none';
+        }
+
+        function keepDropdownMenu() {
+        dropdownMenu.style.display = 'block';
+        }
+
+        categoryBtn.addEventListener('mouseenter', showDropdownMenu);
+        categoryBtn.addEventListener('mouseleave', hideDropdownMenu);
+        dropdownMenu.addEventListener('mouseenter', keepDropdownMenu);
+        dropdownMenu.addEventListener('mouseleave', hideDropdownMenu);
+
+        // Update image based on dropdown selection
+        function getSelectedImage(selectedItem, category) {
+        const imageMap = {
+        // ... (your imageMap here)
+        };
+
+        if (category && imageMap[category]) {
+        return imageMap[category][selectedItem];
+        } else {
+        return imageMap[selectedItem];
+        }
+        }
+
+        // Dropdown selection events
+        const dropdowns = ['category', 'theme-dropdown', 'personality-dropdown', 'age-dropdown'];
+        dropdowns.forEach(dropdownId => {
+        const dropdownItems = document.querySelectorAll(`#${dropdownId} .dropdown-item`);
+        dropdownItems.forEach(item => {
+        item.addEventListener("click", function() {
+        const selectedText = this.textContent;
+        const category = this.closest('.dropdown').querySelector(".dropdown-toggle").textContent;
+        const selectedImage = getSelectedImage(selectedText, category);
+
+        if (selectedImage) {
+        const dropdownToggle = document.querySelector(`#${dropdownId} .dropdown-toggle`);
+        dropdownToggle.textContent = selectedText;
+
+        const cardImage = document.querySelector(`#${dropdownId} .card-img-top`);
+        if (cardImage) {
+        cardImage.src = selectedImage;
+        }
+        }
+        });
+        });
+        });
+        });
+    </script>
+
+</head>
+
+<body>
+<!--헤더 부분-->
+<header class="header">
+    <div class="maincon">
+        <!--이미지 업로드 부분. 원하시는 이미지를 넣어주세요.-->
+        <div class="image-up">
+            <h1>이미지 업로드</h1>
+            <form method="POST" enctype="multipart/form-data">
+                <input type="file" id="imageUpload" name="file">
+                <button type="submit">업로드</button>
+            </form>
+            <div>
+                <img id="imagePreview" style="display:none; max-width:200px;">
+                <button id="deleteImage" style="display:none;">이미지 삭제</button>
+            </div>
+        </div>
+
+
+        <div class="card-container">
+            <div class="card">
+                <img src="{{ url_for('static', filename='ch_image/Dao.png') }}" class="card-img-top" alt="1순위">
+                <div class="card-body">
+                    <p class="card-text">1순위 예시</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="{{ url_for('static', filename='ch_image/Pochacco.png') }}" class="card-img-top" alt="2순위">
+                <div class="card-body">
+                    <p class="card-text">2순위 예시</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="{{ url_for('static', filename='ch_image/Kuromi.png') }}" class="card-img-top" alt="3순위">
+                <div class="card-body">
+                    <p class="card-text">3순위 예시</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</header>
+
+<div class="flex-container">
+    <!--  상품 선택  -->
+    <div class="dropdown flex-container">
+        <a id="categoryBtn" class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+           aria-expanded="false">
+            식품
+        </a>
+
+        <ul id="dropdownMenu" class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">과자</a></li>
+            <li><a class="dropdown-item" href="#">라면</a></li>
+            <li><a class="dropdown-item" href="#">아이스크림</a></li>
+            <li><a class="dropdown-item" href="#">젤리</a></li>
+            <li><a class="dropdown-item" href="#">초콜릿</a></li>
+            <li><a class="dropdown-item" href="#">사탕</a></li>
+        </ul>
+    </div>
+
+    <!-- 테마(분위기 선택) -->
+    <div class="dropdown flex-container">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+           aria-expanded="false">
+            테마(분위기)
+        </a>
+
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">산뜻한</a></li>
+            <li><a class="dropdown-item" href="#">귀여운</a></li>
+            <li><a class="dropdown-item" href="#">도시적인</a></li>
+            <li><a class="dropdown-item" href="#">발랄한</a></li>
+            <li><a class="dropdown-item" href="#">통통 튀는</a></li>
+            <li><a class="dropdown-item" href="#">...</a></li>
+        </ul>
+    </div>
+
+    <!-- 테마(성격 선택) -->
+    <div class="dropdown flex-container">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+           aria-expanded="false">
+            테마(성격)
+        </a>
+
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">친절한</a></li>
+            <li><a class="dropdown-item" href="#">활발한</a></li>
+            <li><a class="dropdown-item" href="#">장난끼 많은</a></li>
+            <li><a class="dropdown-item" href="#">소심한</a></li>
+            <li><a class="dropdown-item" href="#">깜찍한</a></li>
+            <li><a class="dropdown-item" href="#">..</a></li>
+        </ul>
+    </div>
+
+    <!-- 나이 선택 -->
+    <div class="dropdown flex-container">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+           aria-expanded="false">
+            나이
+        </a>
+
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">10대</a></li>
+            <li><a class="dropdown-item" href="#">20대</a></li>
+            <li><a class="dropdown-item" href="#">30대</a></li>
+            <li><a class="dropdown-item" href="#">40대</a></li>
+            <li><a class="dropdown-item" href="#">50대</a></li>
+            <li><a class="dropdown-item" href="#">...</a></li>
+        </ul>
+    </div>
+</div>
+
+<br>
+
+<!--메인 화면 -헤더-푸터 사이-- -->
+<!--<div class="flex-container">-->
+<!--    <div class="card" style="width: 18rem;">-->
+<!--        <img src="{{ url_for('static', filename='gd_image/NoImage.png') }}" class="card-img-top" alt="TestImage1">-->
+<!--        alt="TestImage1">-->
+<!--        <div class="card-body">-->
+<!--            <p class="card-text"> 상품 예시</p>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash;<div class="flex-container">&ndash;&gt;-->
+<!--    <div class="card" style="width: 18rem;">-->
+<!--        <img src="{{ url_for('static', filename='ch_image/Kuromi.png') }}" class="card-img-top"-->
+<!--             alt="Kuromi">-->
+<!--        <div class="card-body">-->
+<!--            <p class="card-text">콜라보 대상? 예시</p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<br>
+
+<!--푸터 구역-->
+<footer>
+    <p>※ 해당 페이지에서 쓰인 사진들은 저작권 위배, 수익 창출 등의 목적으로 사용된 것이 아니며, 예시용으로 쓰임을 명시합니다.</p>
+</footer>
+
+</body>
+</html>
+
+
+
