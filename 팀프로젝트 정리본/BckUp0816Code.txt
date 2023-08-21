@@ -1,0 +1,363 @@
+* 해당 코드는 index.html 파일의 8월 16일자 기준 백업 파일입니다.
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>캐릭터-상품 매칭 서비스</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap JS (Optional, if you want to use dropdown functionality) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        .card-container {
+            display: flex;
+            gap: 20px; /* 원하는 간격 설정 */
+        }
+
+        .card {
+            width: 18rem;
+        }
+
+        .flex-container {
+            display: flex;
+        }
+        .header{
+            display: flex;
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+        // Image Upload Preview
+        document.getElementById("imageUpload").addEventListener("change", function(e) {
+        const file = e.target.files[0];
+        if (file && file.type.startsWith("image/")) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+        const imagePreview = document.getElementById("imagePreview");
+        const deleteButton = document.getElementById("deleteImage");
+
+        imagePreview.src = event.target.result;
+        imagePreview.style.display = "block";
+        deleteButton.style.display = "block"; // Show delete button when an image is previewed
+        }
+        reader.readAsDataURL(file);
+        }
+        });
+
+        // Delete uploaded image
+        document.getElementById("deleteImage").addEventListener("click", function() {
+        const imagePreview = document.getElementById("imagePreview");
+        const deleteButton = document.getElementById("deleteImage");
+
+        imagePreview.src = "";
+        imagePreview.style.display = "none";
+        deleteButton.style.display = "none"; // Hide delete button after image deletion
+        });
+
+        // Dropdown menu show & hide
+        const categoryBtn = document.getElementById('categoryBtn');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+
+        function showDropdownMenu() {
+        dropdownMenu.style.display = 'block';
+        }
+
+        function hideDropdownMenu() {
+        dropdownMenu.style.display = 'none';
+        }
+
+        function keepDropdownMenu() {
+        dropdownMenu.style.display = 'block';
+        }
+
+        categoryBtn.addEventListener('mouseenter', showDropdownMenu);
+        categoryBtn.addEventListener('mouseleave', hideDropdownMenu);
+        dropdownMenu.addEventListener('mouseenter', keepDropdownMenu);
+        dropdownMenu.addEventListener('mouseleave', hideDropdownMenu);
+
+        // Update image based on dropdown selection
+        function getSelectedImage(selectedItem, category) {
+        const imageMap = {
+        // ... (your imageMap here)
+        };
+
+        if (category && imageMap[category]) {
+        return imageMap[category][selectedItem];
+        } else {
+        return imageMap[selectedItem];
+        }
+        }
+
+        // Dropdown selection events
+        const dropdowns = ['category', 'theme-dropdown', 'personality-dropdown', 'age-dropdown'];
+        dropdowns.forEach(dropdownId => {
+        const dropdownItems = document.querySelectorAll(`#${dropdownId} .dropdown-item`);
+        dropdownItems.forEach(item => {
+        item.addEventListener("click", function() {
+        const selectedText = this.textContent;
+        const category = this.closest('.dropdown').querySelector(".dropdown-toggle").textContent;
+        const selectedImage = getSelectedImage(selectedText, category);
+
+        if (selectedImage) {
+        const dropdownToggle = document.querySelector(`#${dropdownId} .dropdown-toggle`);
+        dropdownToggle.textContent = selectedText;
+
+        const cardImage = document.querySelector(`#${dropdownId} .card-img-top`);
+        if (cardImage) {
+        cardImage.src = selectedImage;
+        }
+        }
+        });
+        });
+        });
+        });
+    </script>
+
+</head>
+
+<body>
+<!--헤더 부분-->
+<header class="header">
+    <!--이미지 업로드 부분. 원하시는 이미지를 넣어주세요.-->
+    <div>
+        <h1>이미지 업로드</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" id="imageUpload" name="file">
+            <button type="submit">업로드</button>
+        </form>
+        <div>
+            <img id="imagePreview" style="display:none; max-width:200px;">
+            <button id="deleteImage" style="display:none;">이미지 삭제</button>
+        </div>
+    </div>
+
+
+    <div class="card-container">
+        <div class="card">
+            <img src="{{ url_for('static', filename='ch_image/Dao.png') }}" class="card-img-top" alt="1순위">
+            <div class="card-body">
+                <p class="card-text">1순위 예시</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="{{ url_for('static', filename='ch_image/Pochacco.png') }}" class="card-img-top" alt="2순위">
+            <div class="card-body">
+                <p class="card-text">2순위 예시</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="{{ url_for('static', filename='ch_image/Kuromi.png') }}" class="card-img-top" alt="3순위">
+            <div class="card-body">
+                <p class="card-text">3순위 예시</p>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="flex-container">
+    <!--  상품 선택  -->
+    <div class="dropdown flex-container">
+        <a id="categoryBtn" class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+           aria-expanded="false">
+            식품
+        </a>
+
+        <ul id="dropdownMenu" class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">과자</a></li>
+            <li><a class="dropdown-item" href="#">라면</a></li>
+            <li><a class="dropdown-item" href="#">아이스크림</a></li>
+            <li><a class="dropdown-item" href="#">젤리</a></li>
+            <li><a class="dropdown-item" href="#">초콜릿</a></li>
+            <li><a class="dropdown-item" href="#">사탕</a></li>
+        </ul>
+    </div>
+
+    <!-- 테마(분위기 선택) -->
+    <div class="dropdown flex-container">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+           aria-expanded="false">
+            테마(분위기)
+        </a>
+
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">산뜻한</a></li>
+            <li><a class="dropdown-item" href="#">귀여운</a></li>
+            <li><a class="dropdown-item" href="#">도시적인</a></li>
+            <li><a class="dropdown-item" href="#">발랄한</a></li>
+            <li><a class="dropdown-item" href="#">통통 튀는</a></li>
+            <li><a class="dropdown-item" href="#">...</a></li>
+        </ul>
+    </div>
+
+    <!-- 테마(성격 선택) -->
+    <div class="dropdown flex-container">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+           aria-expanded="false">
+            테마(성격)
+        </a>
+
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">친절한</a></li>
+            <li><a class="dropdown-item" href="#">활발한</a></li>
+            <li><a class="dropdown-item" href="#">장난끼 많은</a></li>
+            <li><a class="dropdown-item" href="#">소심한</a></li>
+            <li><a class="dropdown-item" href="#">깜찍한</a></li>
+            <li><a class="dropdown-item" href="#">..</a></li>
+        </ul>
+    </div>
+
+    <!-- 나이 선택 -->
+    <div class="dropdown flex-container">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+           aria-expanded="false">
+            나이
+        </a>
+
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">10대</a></li>
+            <li><a class="dropdown-item" href="#">20대</a></li>
+            <li><a class="dropdown-item" href="#">30대</a></li>
+            <li><a class="dropdown-item" href="#">40대</a></li>
+            <li><a class="dropdown-item" href="#">50대</a></li>
+            <li><a class="dropdown-item" href="#">...</a></li>
+        </ul>
+    </div>
+</div>
+
+<br>
+
+<!--메인 화면 -헤더-푸터 사이-- -->
+<!--<div class="flex-container">-->
+<!--    <div class="card" style="width: 18rem;">-->
+<!--        <img src="{{ url_for('static', filename='gd_image/NoImage.png') }}" class="card-img-top" alt="TestImage1">-->
+<!--        alt="TestImage1">-->
+<!--        <div class="card-body">-->
+<!--            <p class="card-text"> 상품 예시</p>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash;<div class="flex-container">&ndash;&gt;-->
+<!--    <div class="card" style="width: 18rem;">-->
+<!--        <img src="{{ url_for('static', filename='ch_image/Kuromi.png') }}" class="card-img-top"-->
+<!--             alt="Kuromi">-->
+<!--        <div class="card-body">-->
+<!--            <p class="card-text">콜라보 대상? 예시</p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<br>
+
+<!--푸터 구역-->
+<footer>
+    <p>※ 해당 페이지에서 쓰인 사진들은 저작권 위배, 수익 창출 등의 목적으로 사용된 것이 아니며, 예시용으로 쓰임을 명시합니다.</p>
+</footer>
+
+</body>
+</html>
+
+
+
+
+
+
+--------- * 아래는 app.py 코드 전문 (마찬가지로 8월 16일 기준 백업본)
+
+from flask import Flask, Blueprint, render_template, request, redirect, url_for
+from werkzeug.utils import secure_filename
+from flask_sqlalchemy import SQLAlchemy
+import os
+
+app = Flask(__name__)
+
+# 데이터베이스 설정
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqldb://root:1234@localhost:3306/kcs'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app, engine_options={"connect_args": {"charset": "utf8"}})
+
+page_bp = Blueprint('match', __name__, url_prefix='/')
+
+# 파일 업로드
+@page_bp.route('/uploads', methods=['GET', 'POST'])
+def file_upload():
+    if request.method == 'POST':
+        f = request.files['file']
+        if f:
+            filename = secure_filename(f.filename)
+            f.save('static/uploads/' + filename)
+
+            try:
+                with db.engine.connect() as conn:
+                    # 파일명과 파일경로를 데이터베이스에 저장함
+                    sql = "INSERT INTO images (image_name, image_dir) VALUES (%s, %s)"
+                    conn.execute(sql, (secure_filename(f.filename), 'uploads/' + filename))
+                return '파일 업로드가 성공했습니다'
+            except Exception as e:
+                return 'uploads failed'
+        else:
+            return 'No file uploaded'
+
+    return 'Invalid request method'
+
+# 메인 페이지
+# @page_bp.route('/')
+# def page():
+#     try:
+#         with db.engine.connect() as conn:
+#             # 이미지 정보를 데이터베이스에서 가져옴
+#             sql = "SELECT image_name, image_dir FROM images"
+#             data = conn.execute(sql).fetchall()
+#
+#         data_list = []
+#
+#         for obj in data:
+#             data_dic = {
+#                 'name': obj[0],
+#                 'dir': obj[1]
+#             }
+#             data_list.append(data_dic)
+#
+#         return render_template('index.html', data_list=data_list)
+#     except Exception as e:
+#         return 'An error occurred while fetching data from the database'
+
+
+# 다른 방법
+# 해당 코드는 파일 업로드 테스트하기 위한 임시 코드임
+# 업로드된 파일을 저장할 경로 설정
+UPLOAD_FOLDER = 'uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+@app.route('/', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        # 업로드된 파일 가져오기
+        uploaded_file = request.files['file']
+        if uploaded_file.filename != '':
+            # 파일 저장 경로 설정
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], uploaded_file.filename)
+            # 파일 저장
+            uploaded_file.save(file_path)
+            return 'File uploaded successfully!'
+    return render_template('index.html')
+
+app.register_blueprint(page_bp)
+
+if __name__ == '__main__':
+    app.run(debug=True, host="0.0.0.0")
+
+
+
+
+
+
+

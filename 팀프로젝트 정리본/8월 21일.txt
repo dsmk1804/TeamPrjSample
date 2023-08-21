@@ -1,0 +1,350 @@
+grid 대체제
+
+1. 플렉스 박스 (flexbox)
+
+
+
+
+
+2. 플로트 (floats)
+
+3. 다중 열 (multi column)
+
+
+
+
+
+---- 백업 -------
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>캐릭터-상품 매칭 서비스</title>
+
+    <script src="css/js/main.css"></script>
+
+    <!--    <link rel="stylesheet" href="/css/main.css">-->
+
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap JS (Optional, if you want to use dropdown functionality) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            align-items: center;
+            width: 100%;
+        }
+
+ .header {
+     width: 100%
+     justify-content: center;
+     padding: 2%
+ }
+
+ .container {
+     flex: 0.5;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+ }
+
+ .maincon {
+        display: grid;
+        grid-template-columns: 15% 70% 15%;  /* 3개의 열로 분리: 25%, 50%, 25% */
+            gap: 2%;  /* 각 열간의 간격 */
+            width: 100%;
+            margin: 2% 0;
+    }
+
+
+.sidebar{
+            width: 50%;
+            display: grid;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .image-up {
+            width: 100%;
+            display: grid;
+            justify-content: center;
+        }
+
+        .priority-container {
+    width: 25%;
+    display: grid;
+    flex-direction: column;
+    align-items: center;
+
+
+
+        .dropdown .btn {
+            font-size: 1.2rem;
+            padding: 10px 20px;
+        }
+
+
+ footer {
+     flex: 0.1;
+     text-align: center;
+     background-color: #f1f1f1;
+     padding: 20px;
+     width: 100%;
+ }
+
+ /* 이미지 업로드 부분 스타일 조정 */
+
+ #uploadImage {
+     width: 50%;
+     margin: 20px 0;
+ }
+
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+        // 이미지 업로드
+        document.getElementById("imageUpload").addEventListener("change", function(e) {
+        const file = e.target.files[0];
+        if (file && file.type.startsWith("image/")) {
+        const reader = new FileReader();
+
+        reader.onload = function(event) {
+
+        const imagePreview = document.getElementById("imagePreview");
+        const deleteButton = document.getElementById("deleteImage");
+        const uploadImage = document.getElementById("uploadImage");
+
+        uploadImage.src = event.target.result;
+        uploadImage.style.width = "100%";
+        uploadImage.style.height = "100%";
+
+        deleteButton.style.display = "block";
+        }
+
+        reader.readAsDataURL(file);
+        }
+
+        });
+
+        // 이미지 삭제
+        document.getElementById("deleteImage").addEventListener("click", function() {
+        const imagePreview = document.getElementById("imagePreview");
+        const uploadImage = document.getElementById("uploadImage");
+        const deleteButton = document.getElementById("deleteImage");
+
+
+        uploadImage.src = "static/sample/upload.png";
+        deleteButton.style.display = "none"; // Hide delete button after image deletion
+        });
+
+        // 드롭다운 메뉴 보이기 & 숨기기
+        const categoryBtn = document.getElementById('categoryBtn');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+
+        function showDropdownMenu() {
+        dropdownMenu.style.display = 'block';
+        }
+
+        function hideDropdownMenu() {
+        dropdownMenu.style.display = 'none';
+        }
+
+        function keepDropdownMenu() {
+        dropdownMenu.style.display = 'block';
+        }
+
+        categoryBtn.addEventListener('mouseenter', showDropdownMenu);
+        categoryBtn.addEventListener('mouseleave', hideDropdownMenu);
+        dropdownMenu.addEventListener('mouseenter', keepDropdownMenu);
+        dropdownMenu.addEventListener('mouseleave', hideDropdownMenu);
+
+        // 드롭다운 선택을 베이스로 따라 이미지 변화시키기
+        function getSelectedImage(selectedItem, category) {
+        const imageMap = {
+        // ... (your imageMap here)
+        };
+
+        if (category && imageMap[category]) {
+        return imageMap[category][selectedItem];
+        } else {
+        return imageMap[selectedItem];
+        }
+        }
+
+        // 드롭다운 선택 이벤트모션
+        const dropdowns = ['category', 'theme-dropdown', 'personality-dropdown', 'age-dropdown'];
+        dropdowns.forEach(dropdownId => {
+        const dropdownItems = document.querySelectorAll(`#${dropdownId} .dropdown-item`);
+        dropdownItems.forEach(item => {
+        item.addEventListener("click", function() {
+        const selectedText = this.textContent;
+        const category = this.closest('.dropdown').querySelector(".dropdown-toggle").textContent;
+        const selectedImage = getSelectedImage(selectedText, category);
+
+        if (selectedImage) {
+        const dropdownToggle = document.querySelector(`#${dropdownId} .dropdown-toggle`);
+        dropdownToggle.textContent = selectedText;
+
+        const cardImage = document.querySelector(`#${dropdownId} .card-img-top`);
+        if (cardImage) {
+        cardImage.src = selectedImage;
+        }
+        }
+        });
+        });
+        });
+        });
+    </script>
+
+</head>
+
+<body>
+<!--헤더 부분-->
+<header class="header">
+    <h1>상품 X 애니메이션 콜라보 추천 AI 시스템</h1>
+</header>
+
+    <div class="maincon">
+        <!--이미지 업로드 부분. 원하시는 이미지를 넣어주세요.-->
+        <div class="image-up">
+            <h1>이미지 업로드</h1>
+            <!--            -->
+            <label for="imageUpload" style="cursor: pointer" >
+                <img id="uploadImage" src="static/sample/upload.png" alt="Upload Image" style="width:700px; height:700px;">
+            </label>
+<!--            <form method="POST" enctype="multipart/form-data">-->
+                <input type="file" id="imageUpload" name="file" style="display: none;" onchange="displayImage(this)">
+                <button type="submit">업로드</button>
+<!--            </form>-->
+            <div>
+                <img id="imagePreview" style="display:none; max-width:200px;">
+                <button id="deleteImage">이미지 삭제</button>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="priority-container">
+            <div class="priority-item">
+                <label>1순위</label>
+                <img src="{{ url_for('static', filename='ch_image/Dao.png') }}" alt="1순위">
+            </div>
+
+
+        <div class="priority-item">
+            <div class="priority-item">
+                <label>2순위</label>
+                <img src="{{ url_for('static', filename='ch_image/Pochacco.png') }}" alt="2순위">
+            </div>
+        </div>
+
+        <div class="priority-item">
+            <label>3순위</label>
+            <img src="{{ url_for('static', filename='ch_image/Kuromi.png') }}" alt="3순위">
+        </div>
+        </div>
+    </div>
+
+<div class="container" style="margin-bottom: 20px;">
+    <div class="sidebar">
+    <!--  상품 선택  -->
+    <div class="dropdown flex-container">
+        <a id="categoryBtn" class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+           aria-expanded="false">
+            식품
+        </a>
+
+        <ul id="dropdownMenu" class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">과자</a></li>
+            <li><a class="dropdown-item" href="#">라면</a></li>
+            <li><a class="dropdown-item" href="#">아이스크림</a></li>
+            <li><a class="dropdown-item" href="#">젤리</a></li>
+            <li><a class="dropdown-item" href="#">초콜릿</a></li>
+            <li><a class="dropdown-item" href="#">사탕</a></li>
+        </ul>
+    </div>
+
+    <!-- 테마(분위기 선택) -->
+    <div class="dropdown flex-container">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+           aria-expanded="false">
+            테마(분위기)
+        </a>
+
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">산뜻한</a></li>
+            <li><a class="dropdown-item" href="#">귀여운</a></li>
+            <li><a class="dropdown-item" href="#">도시적인</a></li>
+            <li><a class="dropdown-item" href="#">발랄한</a></li>
+            <li><a class="dropdown-item" href="#">통통 튀는</a></li>
+            <li><a class="dropdown-item" href="#">...</a></li>
+        </ul>
+    </div>
+
+    <!-- 테마(성격 선택) -->
+    <div class="dropdown flex-container">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+           aria-expanded="false">
+            테마(성격)
+        </a>
+
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">친절한</a></li>
+            <li><a class="dropdown-item" href="#">활발한</a></li>
+            <li><a class="dropdown-item" href="#">장난끼 많은</a></li>
+            <li><a class="dropdown-item" href="#">소심한</a></li>
+            <li><a class="dropdown-item" href="#">깜찍한</a></li>
+            <li><a class="dropdown-item" href="#">..</a></li>
+        </ul>
+    </div>
+
+    <!-- 나이 선택 -->
+    <div class="dropdown flex-container">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+           aria-expanded="false">
+            나이
+        </a>
+
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">10대</a></li>
+            <li><a class="dropdown-item" href="#">20대</a></li>
+            <li><a class="dropdown-item" href="#">30대</a></li>
+            <li><a class="dropdown-item" href="#">40대</a></li>
+        </ul>
+    </div>
+    </div>
+
+    <div class="team_name">제 3조</div>
+
+</div>
+
+<br>
+<br>
+<br>
+<!--푸터 구역-->
+<footer>
+    <p>※ 해당 페이지에서 쓰인 사진들은 저작권 위배, 수익 창출 등의 목적으로 사용된 것이 아니며, 예시용으로 쓰임을 명시합니다.</p>
+</footer>
+
+</body>
+</html>
+
+- 코드 수정 조건 (px 말고 %를 이용할 것.)
+1. header 부분은 맨 위쪽 중앙에, 
+2. body 부분 (세로로 나눈 후 3구역으로 분할.)
+2-1. 왼쪽은 sidebar. side bar 크기를 화면의 반 크기로 해주세요.
+2-2. 정 중앙에는 maincon. 
+2-3. 맨 오른쪽에는 prioriry-container
+3. 맨 밑에는 footer가 담당 
+
+

@@ -1,0 +1,26 @@
+백업본
+
+        <div class="card-container">
+            <div class="card">
+                <img src="{{ url_for('static', filename='ch_image/Dao.png') }}" class="card-img-top" alt="1순위">
+                <div class="card-body">
+                    <p class="card-text">1순위 예시</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="{{ url_for('static', filename='ch_image/Pochacco.png') }}" class="card-img-top" alt="2순위">
+                <div class="card-body">
+                    <p class="card-text">2순위 예시</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="{{ url_for('static', filename='ch_image/Kuromi.png') }}" class="card-img-top" alt="3순위">
+                <div class="card-body">
+                    <p class="card-text">3순위 예시</p>
+                </div>
+            </div>
+        </div>
+
+    </div>

@@ -1,0 +1,250 @@
+서프라이즈 말고 필요한 라이브러리 검색하기
+- 상품을 식품으로 하고. 세부 사항을 나이(10 20대라던지) / 성별 /성격 .... 선택하면 1순위/2순위/3순위 이미지가 뜨는 프로그램
+(드랍다운 방식, Tkinter 라이브러리, scikit-learn을 채택할 것.)
+
+↓ 아래는 챗 지피티의 예시 
+
+import tkinter as tk
+from tkinter import ttk
+from sklearn.preprocessing import LabelEncoder
+from sklearn.naive_bayes import MultinomialNB
+import numpy as np
+
+# 가상의 상품 데이터
+product_data = {
+    '식품': {
+        ('10대', '남성', '성격1'): ['상품1_1.jpg', '상품1_2.jpg', '상품1_3.jpg'],
+        ('20대', '여성', '성격2'): ['상품2_1.jpg', '상품2_2.jpg', '상품2_3.jpg'],
+        # 다른 조합의 데이터도 추가
+    },
+    # 다른 상품 유형도 추가
+}
+
+# 가상의 상품 선호도 데이터
+preference_data = {
+    '식품': {
+        ('10대', '남성', '성격1'): 0.8,
+        ('20대', '여성', '성격2'): 0.7,
+        # 다른 조합의 데이터도 추가
+    },
+    # 다른 상품 유형도 추가
+}
+
+def update_images():
+    selected_product = product_var.get()
+    selected_age = age_var.get()
+    selected_gender = gender_var.get()
+    selected_personality = personality_var.get()
+
+    if selected_product and selected_age and selected_gender and selected_personality:
+        preference = preference_model.predict_proba([[selected_age, selected_gender, selected_personality]])[0]
+        sorted_indices = np.argsort(preference)[::-1]
+
+        top_images = []
+        for idx in sorted_indices[:3]:
+            top_images.extend(product_data[selected_product].get(encoder.inverse_transform(idx), []))
+        
+        # 이미지 표시 로직 구현 (예: 이미지 위젯 변경)
+        # 이 예시에서는 이미지 경로 리스트를 가져와서 처리하는 것으로 가정합니다.
+
+# GUI 생성
+root = tk.Tk()
+root.title("상품 추천 프로그램")
+
+# 드롭다운 메뉴용 변수들
+product_var = tk.StringVar()
+age_var = tk.StringVar()
+gender_var = tk.StringVar()
+personality_var = tk.StringVar()
+
+# 드롭다운 메뉴 생성
+product_label = ttk.Label(root, text="상품 유형:")
+product_label.pack()
+product_menu = ttk.Combobox(root, textvariable=product_var, values=list(product_data.keys()))
+product_menu.pack()
+
+age_label = ttk.Label(root, text="나이:")
+age_label.pack()
+age_menu = ttk.Combobox(root, textvariable=age_var, values=['10대', '20대', '30대', '40대 이상'])
+age_menu.pack()
+
+gender_label = ttk.Label(root, text="성별:")
+gender_label.pack()
+gender_menu = ttk.Combobox(root, textvariable=gender_var, values=['남성', '여성'])
+gender_menu.pack()
+
+personality_label = ttk.Label(root, text="성격:")
+personality_label.pack()
+personality_menu = ttk.Combobox(root, textvariable=personality_var, values=['성격1', '성격2', '성격3'])
+personality_menu.pack()
+
+update_button = ttk.Button(root, text="이미지 업데이트", command=update_images)
+update_button.pack()
+
+# 선호도 예측 모델 초기화
+encoder = LabelEncoder()
+preference_model = MultinomialNB()
+
+# 데이터 전처리 및 학습
+X = []
+y = []
+for product, preferences in preference_data.items():
+    for info, preference in preferences.items():
+        X.append(info)
+        y.append(product)
+
+X_encoded = encoder.fit_transform(X)
+preference_model.fit(X_encoded.reshape(-1, 1), y)
+
+# GUI 시작
+root.mainloop()
+
+
+
+-------- 뤼튼 --------
+요구사항에 따라, 상품 추천 프로그램을 만들기 위해서는 다음과 같은 단계를 거칠 수 있습니다.
+
+1. 데이터 수집 및 전처리
+   - 상품 정보(이미지, 이름 등)와 세부 사항(나이, 성별 등)을 포함하는 데이터셋을 구성합니다.
+2. 모델 학습
+   - scikit-learn 라이브러리를 사용하여 분류(Classification) 모델을 학습시킵니다.
+3. GUI(Graphical User Interface) 개발
+   - Tkinter 라이브러리를 사용하여 드롭다운 방식의 UI(User Interface)를 구현합니다.
+4. 예측 결과 출력 
+    - 입력된 조건에 맞게 분류 모델로 예측한 결과 이미지 파일들 중 1순위/2순위/3순위 이미지 파일들만 화면에 출력해줍니다.
+
+각 단계에서 필요한 기능과 코드 작성 방법은 아래와 같습니다.
+
+### 1단계: 데이터 수집 및 전처리
+
+데이터셋으로 사용할 CSV 파일 형태의 샘플 데이터는 다음과 같습니다.
+
+```csv
+name,image_url,age_range,gender,personality,type_1,type_2,type_3,label
+상품A,url_A,"10대","여자","착함",0,-0.5,-0.5,A관련상품다른분야관려X  
+상풉B,url_B,"20대","남자","잘생김",-0.,-0.,-100,B관려Y  
+...
+```
+
+CSV파일 내용 설명:
+* name : 제목 (string)
+* image_url : 해당 제목의 대체 텍스트(string)
+* age_range : 연령대 (10~19세 ,20~29세 ...) (string)
+* gender: 성별재(string), 나이가 어린 경우 '못알아보겠어요' 와같은 대체 텍스트 가능 
+* personality: 인터넷 유행어로 나타내는 여러 가치 관념 중 하나 선택 ("착함", "잘생김" 등등...) (string)
+    * 이외 추가적인 속성도 원하신다면 자유롭게 추가 가능합니다!
+    
+전체 코드:
+
+```python
+
+import pandas as pd
+
+
+# csv file path 설정하기 
+data_path = './product_data.csv'
+
+# csv file 읽기(pd.read_csv())
+df = pd.read_csv(data_path)
+
+print(df.head())
+
+```
+
+### 2단계: 모델 학습
+
+scikit-learn 라이브러리에서 지원하는 Decision Tree 알고리즘
+
+----------- 모니카 ---------------
+
+좋습니다. 이제부터 파이썬으로 해당 프로그램을 만들어보겠습니다. 먼저 필요한 라이브러리를 import합니다.
+
+python
+복사
+from tkinter import *
+from tkinter import ttk
+from sklearn.neighbors import KNeighborsClassifier
+import os
+다음으로, 추천 알고리즘에 사용될 데이터셋을 불러옵니다. 이 예시에서는 간단한 식품 상품 데이터셋을 사용할 것입니다.
+
+python
+복사
+data = {
+    'Age': [20, 30, 40, 50, 60, 70, 80],
+    'Gender': ['Male', 'Female', 'Male', 'Female', 'Male', 'Female', 'Male'],
+    'Personality': ['A', 'B', 'C', 'A', 'B', 'C', 'A'],
+    'Image': ['image1.png', 'image2.png', 'image3.png', 'image4.png', 'image5.png', 'image6.png', 'image7.png']
+}
+그 다음으로, Tkinter를 사용하여 GUI를 구성합니다. 드랍다운 메뉴를 사용하여 나이, 성별, 성격 등의 조건을 선택할 수 있도록 합니다.
+
+python
+복사
+class FoodRecommendation:
+    def __init__(self, master):
+        self.master = master
+        master.title("Food Recommendation System")
+
+        # 나이 선택 드랍다운 메뉴
+        age_label = Label(master, text="Select Age:")
+        age_label.grid(row=0, column=0)
+        self.age_var = StringVar()
+        self.age_combobox = ttk.Combobox(master, textvariable=self.age_var)
+        self.age_combobox['values'] = data['Age']
+        self.age_combobox.grid(row=0, column=1)
+
+        # 성별 선택 드랍다운 메뉴
+        gender_label = Label(master, text="Select Gender:")
+        gender_label.grid(row=1, column=0)
+        self.gender_var = StringVar()
+        self.gender_combobox = ttk.Combobox(master, textvariable=self.gender_var)
+        self.gender_combobox['values'] = data['Gender']
+        self.gender_combobox.grid(row=1, column=1)
+
+        # 성격 선택 드랍다운 메뉴
+        personality_label = Label(master, text="Select Personality:")
+        personality_label.grid(row=2, column=0)
+        self.personality_var = StringVar()
+        self.personality_combobox = ttk.Combobox(master, textvariable=self.personality_var)
+        self.personality_combobox['values'] = data['Personality']
+        self.personality_combobox.grid(row=2, column=1)
+
+        # 추천 버튼
+        recommend_button = Button(master, text="Recommend", command=self.recommend)
+        recommend_button.grid(row=3, column=1)
+
+    # 추천 알고리즘 실행 함수
+    def recommend(self):
+        age = int(self.age_var.get())
+        gender = self.gender_var.get()
+        personality = self.personality_var.get()
+
+        # 입력된 조건에 맞는 이미지 추천
+        knn = KNeighborsClassifier(n_neighbors=3)
+        X = []
+        for i in range(len(data['Age'])):
+            X.append([data['Age'][i], 1 if data['Gender'][i] == 'Male' else 0])
+            if data['Personality'][i] == personality:
+                image_path = os.path.join(os.getcwd(), "images", data['Image'][i])
+                image_label = Label(self.master, image=image_path)
+                image_label.grid(row=4, column=1)
+
+# GUI 실행
+root = Tk()
+app = FoodRecommendation(root)
+root.mainloop()
+위 코드를 실행하면 GUI가 실행되며, 나이, 성별, 성격 등의 조건을 선택하고 추천 버튼을 누르면 해당 조건에 맞는 이미지가 출력됩니다. 이 예시는 매우 간단한 형태의 프로그램이며, 보다 복잡하고 유용한 프로그램을 만들기 위해서는 추가적인 기능과 데이터셋이 필요할 수 있습니다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

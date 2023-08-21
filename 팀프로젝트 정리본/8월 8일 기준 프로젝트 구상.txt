@@ -1,0 +1,44 @@
+- 8월 8일 기준 프로젝트 구상
+
+1. 애니메이션 or 게임 캐릭터 - 음식 콜라보 성공 사례 조사 
+
+
+======= 2. 예시 조사 ================
+	  - 게임 - 
+1. 디아블로4 - 햇반컵반 매운불닭 컵밥
+https://www.yna.co.kr/view/AKR20230713121900003?input=1195m
+
+1-1. 디아블로 4 - 버거킹 헬로 와퍼 시리즈
+https://www.yna.co.kr/view/AKR20230703033500003?input=1195m
+
+
+2. 미니게임 천국 - 베이컨 참치마요 / 계란듬뿍 샌드위치 / 아삭햄치즈
+https://www.gamemeca.com/view.php?gid=1739765
+https://game.donga.com/108294/
+
+3. 메이플 스토리 - 빵 / 딸기별스낵 / 돌정령초코... 등
+https://game.mk.co.kr/view.php?year=2022&no=1130797
+https://www.etoday.co.kr/news/view/2203539
+
+
+------------------------------------------------------------------------------------------
+
+	  - 애니메이션 - 
+1. 산리오 시리즈 - 이디야 / 세븐일레븐 / etc
+-공식 사이트: https://www.ediya.com/sanrio_event/main.html
+이부분은 그냥 콜라보 굿즈 소개같더라구여! 산리오 관련 콜라보 기사가 있었으면 괜찮을것같습니다
+
+http://www.sisacast.kr/news/articleView.html?idxno=42479
+
+2. 포켓몬 - 포켓몬 빵 / 
+https://economist.co.kr/article/view/ecn202306260028
+
+
+3. 디즈니 - 농심 백산수 etc..
+https://www.jungle.co.kr/magazine/205429
+
+================================
+
+3. 캐릭터 이미지 수집(ch_image 폴더에 저장해둘 것)
+
+4. 콜라보 상품 수집(gd_image 폴더에 저장해둘 것)

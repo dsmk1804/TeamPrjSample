@@ -1,0 +1,26 @@
+pip install selenium
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+# 크롬 드라이버 경로 설정 (드라이버 다운로드 필요)
+driver_path = 'path_to_chromedriver.exe'  # 크롬 드라이버 경로로 바꿔주세요
+driver = webdriver.Chrome(driver_path)
+
+# 크롤링할 홈페이지 URL
+url = "https://www.naver.com"
+
+# 브라우저 열기
+driver.get(url)
+
+# 추출할 데이터의 태그와 클래스 찾기
+news_titles = driver.find_elements(By.CLASS_NAME, "nav")
+
+# 추출한 데이터 출력
+for title in news_titles:
+    print(title.text)
+
+# 브라우저 닫기
+driver.quit()
+
+

@@ -1,0 +1,13 @@
+진행과정 저장용. 
+
+번호 / 애니메이션 이름 / 장르/ 글소개 해서 엑셀파일에 넣을거
+
+※ 애니메이션 조사는 (8월 8일 최종정리본) 이랑 애니메이션 상세 조사에 있음. 참고할 것.
+※ 라프텔, 넷플릭스 활용하기
+
+https://www.kaggle.com/datasets/CooperUnion/anime-recommendations-database?resource=download
+애니메이션 데이터베이스 화 시킨 거
+
+에피소드 수랑 평점도 같이 넣어도 될..듯?
+
+

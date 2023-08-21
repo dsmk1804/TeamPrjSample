@@ -1,0 +1,9 @@
+1. 플라스크에서 CKEditor 파일첨부 연동 
+ https://www.stechstar.com/user/zbxe/AlgorithmPython/73982
+
+2. 파일 업로드 라이브러리 : gu-upload 2019 버전 
+ https://forest71.tistory.com/196
+
+3. 파이썬 플라스크 로컬 서버에 파일 업로드하고 출력하기 
+ https://yong0810.tistory.com/22
+
