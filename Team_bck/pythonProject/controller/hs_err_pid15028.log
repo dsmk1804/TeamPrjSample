@@ -1,0 +1,617 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  EXCEPTION_UNCAUGHT_CXX_EXCEPTION (0xe06d7363) at pc=0x00007ff9f5894c3c, pid=15028, tid=16164
+#
+# JRE version: Java(TM) SE Runtime Environment (17.0.6+9) (build 17.0.6+9-LTS-190)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (17.0.6+9-LTS-190, mixed mode, sharing, tiered, compressed oops, compressed class ptrs, g1 gc, windows-amd64)
+# Problematic frame:
+# C  [KERNELBASE.dll+0x64c3c]
+#
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   https://bugreport.java.com/bugreport/crash.jsp
+# The crash happened outside the Java Virtual Machine in native code.
+# See problematic frame for where to report the bug.
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Dfile.encoding=UTF8 -ea -Xmx1024m 
+
+Host: 12th Gen Intel(R) Core(TM) i7-12700, 20 cores, 15G,  Windows 11 , 64 bit Build 22621 (10.0.22621.2070)
+Time: Wed Aug 30 12:45:46 2023 대한민국 표준시 elapsed time: 0.174115 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000026e8081a870):  JavaThread "main" [_thread_in_native, id=16164, stack(0x000000a60ac00000,0x000000a60adf0000)]
+
+Stack: [0x000000a60ac00000,0x000000a60adf0000],  sp=0x000000a60adeb8d0,  free space=1966k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [KERNELBASE.dll+0x64c3c]
+C  [VCRUNTIME140.dll+0x6720]
+C  [_jpype.cp311-win_amd64.pyd+0x3bfb4]
+C  [_jpype.cp311-win_amd64.pyd+0x2affb]
+C  0x0000026e91bfd621
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  org.jpype.manager.TypeFactoryNative.newWrapper(JJ)V+0
+j  org.jpype.JPypeContext.newWrapper(J)V+16
+v  ~StubRoutines::call_stub
+j  org.jpype.manager.TypeFactoryNative.newWrapper(JJ)V+0
+j  org.jpype.JPypeContext.newWrapper(J)V+16
+v  ~StubRoutines::call_stub
+j  org.jpype.manager.TypeFactoryNative.newWrapper(JJ)V+0
+j  org.jpype.JPypeContext.newWrapper(J)V+16
+v  ~StubRoutines::call_stub
+
+siginfo: EXCEPTION_UNCAUGHT_CXX_EXCEPTION (0xe06d7363), ExceptionInformation=0x0000000019930520 0x000000a60adebb30 0x00007ff9b6956df8 0x00007ff9b68f0000 
+
+
+Register to memory mapping:
+
+RIP=0x00007ff9f5894c3c KERNELBASE.dll
+RAX=0x0000000000000001 is an unknown value
+RBX=0x00007ff9b6956df8 _jpype.cp311-win_amd64.pyd
+RCX=0x00007ff9b68f0000 _jpype.cp311-win_amd64.pyd
+RDX=0x0000000019930520 is an unknown value
+RSP=0x000000a60adeb8d0 is pointing into the stack for thread: 0x0000026e8081a870
+RBP=0x000000a60adebb10 is pointing into the stack for thread: 0x0000026e8081a870
+RSI=0x000000a60adebb30 is pointing into the stack for thread: 0x0000026e8081a870
+RDI=0x0000000019930520 is an unknown value
+R8 =0x00007ff9b690e245 _jpype.cp311-win_amd64.pyd
+R9 =0x000000a60adeb260 is pointing into the stack for thread: 0x0000026e8081a870
+R10=0x0000026ed70df0b0 points into unknown readable memory: 0x00007ff9b69442f0 | f0 42 94 b6 f9 7f 00 00
+R11=0x0000026ed70df0b0 points into unknown readable memory: 0x00007ff9b69442f0 | f0 42 94 b6 f9 7f 00 00
+R12=0x0000026e81755fc0 points into unknown readable memory: 0x0000000000000002 | 02 00 00 00 00 00 00 00
+R13=0x000000a60adebc00 is pointing into the stack for thread: 0x0000026e8081a870
+R14=0x0000026e82911bf0 points into unknown readable memory: 0x00007ff9b6942d70 | 70 2d 94 b6 f9 7f 00 00
+R15=0x0000026e81759740 points into unknown readable memory: 0x0000000000000001 | 01 00 00 00 00 00 00 00
+
+
+Registers:
+RAX=0x0000000000000001, RBX=0x00007ff9b6956df8, RCX=0x00007ff9b68f0000, RDX=0x0000000019930520
+RSP=0x000000a60adeb8d0, RBP=0x000000a60adebb10, RSI=0x000000a60adebb30, RDI=0x0000000019930520
+R8 =0x00007ff9b690e245, R9 =0x000000a60adeb260, R10=0x0000026ed70df0b0, R11=0x0000026ed70df0b0
+R12=0x0000026e81755fc0, R13=0x000000a60adebc00, R14=0x0000026e82911bf0, R15=0x0000026e81759740
+RIP=0x00007ff9f5894c3c, EFLAGS=0x0000000000000206
+
+Top of Stack: (sp=0x000000a60adeb8d0)
+0x000000a60adeb8d0:   0000026e816f27f0 00007ff9b6956df8
+0x000000a60adeb8e0:   000000a60adebb30 000000a60adebb10
+0x000000a60adeb8f0:   00000081e06d7363 0000000000000000
+0x000000a60adeb900:   00007ff9f5894c3c 0000000000000004
+0x000000a60adeb910:   0000000019930520 000000a60adebb30
+0x000000a60adeb920:   00007ff9b6956df8 00007ff9b68f0000
+0x000000a60adeb930:   0000000000000000 0000026e81100000
+0x000000a60adeb940:   0000000000000000 00007ff9b6956df8
+0x000000a60adeb950:   0000026e82911bf0 00007ff9f84065cf
+0x000000a60adeb960:   000000a60adeb9d0 00007ff9b695e000
+0x000000a60adeb970:   000000a60adebb30 0000000019930520
+0x000000a60adeb980:   00007ff9b695e000 00007ff9b68f0000
+0x000000a60adeb990:   0000dff92167fc6d 0000026ed8c03a60
+0x000000a60adeb9a0:   00007ff9b6956df8 00007ff9f2206720
+0x000000a60adeb9b0:   0000000000000000 0000026e81103d60
+0x000000a60adeb9c0:   000000a60adebb30 00007ff9b69082a0 
+
+Instructions: (pc=0x00007ff9f5894c3c)
+0x00007ff9f5894b3c:   ff 4c 8d 05 74 49 2c 00 33 d2 b9 00 00 10 00 e8
+0x00007ff9f5894b4c:   80 97 fd ff 4c 8b f0 48 89 44 24 58 48 85 c0 0f
+0x00007ff9f5894b5c:   84 0b fe ff ff 4c 8d 05 38 49 2c 00 33 d2 8d 4a
+0x00007ff9f5894b6c:   02 e8 5e 97 fd ff 48 8b f8 48 89 44 24 50 e9 ed
+0x00007ff9f5894b7c:   fd ff ff 45 33 c0 49 8b d7 48 83 c9 ff e8 a2 64
+0x00007ff9f5894b8c:   01 00 e9 08 ff ff ff 48 8b 0d 46 30 2f 00 e8 a1
+0x00007ff9f5894b9c:   15 fd ff 48 8b cf e8 59 ef fb ff e9 f8 fe ff ff
+0x00007ff9f5894bac:   49 8b ce e8 4c ef fb ff e9 f4 fe ff ff 48 8b ce
+0x00007ff9f5894bbc:   e8 3f ef fb ff e9 f0 fe ff ff cc cc 71 18 d3 7a
+0x00007ff9f5894bcc:   1a 87 89 f9 48 81 ec d8 00 00 00 48 8b 05 a2 03
+0x00007ff9f5894bdc:   2f 00 48 33 c4 48 89 84 24 c0 00 00 00 48 83 64
+0x00007ff9f5894bec:   24 28 00 48 8d 05 da ff ff ff 83 e2 01 89 4c 24
+0x00007ff9f5894bfc:   20 89 54 24 24 48 89 44 24 30 4d 85 c9 74 4f b8
+0x00007ff9f5894c0c:   0f 00 00 00 48 8d 4c 24 40 44 3b c0 49 8b d1 41
+0x00007ff9f5894c1c:   0f 46 c0 44 8b c0 44 89 44 24 38 49 c1 e0 03 e8
+0x00007ff9f5894c2c:   97 df 05 00 48 8d 4c 24 20 48 ff 15 14 a6 1f 00
+0x00007ff9f5894c3c:   0f 1f 44 00 00 48 8b 8c 24 c0 00 00 00 48 33 cc
+0x00007ff9f5894c4c:   e8 2f 26 05 00 48 81 c4 d8 00 00 00 c3 cc 83 64
+0x00007ff9f5894c5c:   24 38 00 eb cf cc cc cc cc cc cc cc 48 8b c4 48
+0x00007ff9f5894c6c:   89 58 08 48 89 70 10 48 89 78 18 4c 89 68 20 55
+0x00007ff9f5894c7c:   41 56 41 57 48 8d 68 a1 48 81 ec e0 00 00 00 48
+0x00007ff9f5894c8c:   8b 05 ee 02 2f 00 48 33 c4 48 89 45 3f 45 33 ff
+0x00007ff9f5894c9c:   66 c7 45 2b 00 05 48 8d 45 c7 44 89 7d 27 48 89
+0x00007ff9f5894cac:   44 24 50 48 8d 4d 27 44 89 7c 24 48 45 33 c9 44
+0x00007ff9f5894cbc:   89 7c 24 40 45 8d 47 12 44 89 7c 24 38 b2 01 44
+0x00007ff9f5894ccc:   89 7c 24 30 41 8b df 44 89 7c 24 28 41 8b ff 44
+0x00007ff9f5894cdc:   89 7c 24 20 45 8b f7 44 89 7d 2f 66 c7 45 33 00
+0x00007ff9f5894cec:   01 44 89 7d 37 66 c7 45 3b 00 10 4c 89 7d c7 4c
+0x00007ff9f5894cfc:   89 7d cf 4c 89 7d d7 4c 89 7d df 48 ff 15 62 a6
+0x00007ff9f5894d0c:   1f 00 0f 1f 44 00 00 85 c0 0f 88 a7 02 00 00 48
+0x00007ff9f5894d1c:   8d 45 cf 41 b9 20 02 00 00 48 89 44 24 50 45 8d
+0x00007ff9f5894d2c:   6f 02 44 89 7c 24 48 45 8d 47 20 44 89 7c 24 40 
+
+
+Stack slot to memory mapping:
+stack at sp + 0 slots: 0x0000026e816f27f0 points into unknown readable memory: 0x0000000000000001 | 01 00 00 00 00 00 00 00
+stack at sp + 1 slots: 0x00007ff9b6956df8 _jpype.cp311-win_amd64.pyd
+stack at sp + 2 slots: 0x000000a60adebb30 is pointing into the stack for thread: 0x0000026e8081a870
+stack at sp + 3 slots: 0x000000a60adebb10 is pointing into the stack for thread: 0x0000026e8081a870
+stack at sp + 4 slots: 0x00000081e06d7363 is an unknown value
+stack at sp + 5 slots: 0x0 is NULL
+stack at sp + 6 slots: 0x00007ff9f5894c3c KERNELBASE.dll
+stack at sp + 7 slots: 0x0000000000000004 is an unknown value
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x0000026e829a9c70, length=19, elements={
+0x0000026e8081a870, 0x0000026e8081b6e0, 0x0000026e808156a0, 0x0000026e80814360,
+0x0000026e80813e90, 0x0000026e808181f0, 0x0000026e80814d00, 0x0000026e806d0be0,
+0x0000026e806cf7a0, 0x0000026e806d7120, 0x0000026e806d7630, 0x0000026e806d01c0,
+0x0000026e806d9490, 0x0000026e80817850, 0x0000026e8081bbb0, 0x0000026e808186c0,
+0x0000026e806de590, 0x0000026e8081c080, 0x0000026e80816eb0
+}
+
+Java Threads: ( => current thread )
+=>0x0000026e8081a870 JavaThread "main" [_thread_in_native, id=16164, stack(0x000000a60ac00000,0x000000a60adf0000)]
+  0x0000026e8081b6e0 JavaThread "Reference Handler" daemon [_thread_blocked, id=5880, stack(0x000000a610900000,0x000000a610af0000)]
+  0x0000026e808156a0 JavaThread "Finalizer" daemon [_thread_blocked, id=9848, stack(0x000000a610af0000,0x000000a610ce0000)]
+  0x0000026e80814360 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=7408, stack(0x000000a610ce0000,0x000000a610ed0000)]
+  0x0000026e80813e90 JavaThread "Attach Listener" daemon [_thread_blocked, id=17100, stack(0x000000a610ed0000,0x000000a6110c0000)]
+  0x0000026e808181f0 JavaThread "Service Thread" daemon [_thread_blocked, id=9000, stack(0x000000a6110c0000,0x000000a6112b0000)]
+  0x0000026e80814d00 JavaThread "Monitor Deflation Thread" daemon [_thread_blocked, id=1516, stack(0x000000a6112b0000,0x000000a6114a0000)]
+  0x0000026e806d0be0 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=10740, stack(0x000000a6114a0000,0x000000a611690000)]
+  0x0000026e806cf7a0 JavaThread "C1 CompilerThread0" daemon [_thread_blocked, id=17112, stack(0x000000a611690000,0x000000a611880000)]
+  0x0000026e806d7120 JavaThread "Sweeper thread" daemon [_thread_blocked, id=16452, stack(0x000000a611880000,0x000000a611a70000)]
+  0x0000026e806d7630 JavaThread "C1 CompilerThread1" daemon [_thread_blocked, id=14044, stack(0x000000a611a70000,0x000000a611c60000)]
+  0x0000026e806d01c0 JavaThread "C1 CompilerThread2" daemon [_thread_blocked, id=15476, stack(0x000000a611c60000,0x000000a611e50000)]
+  0x0000026e806d9490 JavaThread "C1 CompilerThread3" daemon [_thread_blocked, id=15060, stack(0x000000a611e50000,0x000000a612040000)]
+  0x0000026e80817850 JavaThread "Notification Thread" daemon [_thread_blocked, id=8024, stack(0x000000a612040000,0x000000a612230000)]
+  0x0000026e8081bbb0 JavaThread "Common-Cleaner" daemon [_thread_blocked, id=2932, stack(0x000000a612420000,0x000000a612610000)]
+  0x0000026e808186c0 JavaThread "Python Reference Queue" daemon [_thread_in_native, id=10856, stack(0x000000a612610000,0x000000a612800000)]
+  0x0000026e806de590 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=16400, stack(0x000000a612800000,0x000000a6129f0000)]
+  0x0000026e8081c080 JavaThread "SIGINT handler" daemon [_thread_blocked, id=8128, stack(0x000000a6133a0000,0x000000a613590000)]
+  0x0000026e80816eb0 JavaThread "Thread-0" [_thread_blocked, id=5724, stack(0x000000a613590000,0x000000a613780000)]
+
+Other Threads:
+  0x0000026e80724c80 VMThread "VM Thread" [stack: 0x000000a610710000,0x000000a610900000] [id=5856]
+  0x0000026e8097cc50 WatcherThread [stack: 0x000000a612230000,0x000000a612420000] [id=11356]
+  0x0000026e80524ae0 GCTaskThread "GC Thread#0" [stack: 0x000000a60fd60000,0x000000a60ff50000] [id=8028]
+  0x0000026e8051df60 GCTaskThread "GC Thread#1" [stack: 0x000000a6129f0000,0x000000a612be0000] [id=6040]
+  0x0000026e8051fa40 GCTaskThread "GC Thread#2" [stack: 0x000000a612be0000,0x000000a612dd0000] [id=6312]
+  0x0000026e80523560 GCTaskThread "GC Thread#3" [stack: 0x000000a612dd0000,0x000000a612fc0000] [id=15080]
+  0x0000026e8051e210 GCTaskThread "GC Thread#4" [stack: 0x000000a612fc0000,0x000000a6131b0000] [id=14420]
+  0x0000026e8051e4c0 GCTaskThread "GC Thread#5" [stack: 0x000000a6131b0000,0x000000a6133a0000] [id=17048]
+  0x0000026e8231a7f0 ConcurrentGCThread "G1 Main Marker" [stack: 0x000000a60ff50000,0x000000a610140000] [id=10808]
+  0x0000026e805232b0 ConcurrentGCThread "G1 Conc#0" [stack: 0x000000a610140000,0x000000a610330000] [id=9876]
+  0x0000026e80591f30 ConcurrentGCThread "G1 Refine#0" [stack: 0x000000a610330000,0x000000a610520000] [id=9716]
+  0x0000026e80be02c0 ConcurrentGCThread "G1 Service" [stack: 0x000000a610520000,0x000000a610710000] [id=15600]
+
+Threads with active compile tasks:
+
+VM state: not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap address: 0x00000000c0000000, size: 1024 MB, Compressed Oops mode: 32-bit
+
+CDS archive(s) mapped at: [0x0000000800000000-0x0000000800bd0000-0x0000000800bd0000), size 12386304, SharedBaseAddress: 0x0000000800000000, ArchiveRelocationMode: 0.
+Compressed class space mapped at: 0x0000000800c00000-0x0000000840c00000, reserved size: 1073741824
+Narrow klass base: 0x0000000800000000, Narrow klass shift: 0, Narrow klass range: 0x100000000
+
+GC Precious Log:
+ CPUs: 20 total, 20 available
+ Memory: 16154M
+ Large Page Support: Disabled
+ NUMA Support: Disabled
+ Compressed Oops: Enabled (32-bit)
+ Heap Region Size: 1M
+ Heap Min Capacity: 8M
+ Heap Initial Capacity: 254M
+ Heap Max Capacity: 1G
+ Pre-touch: Disabled
+ Parallel Workers: 15
+ Concurrent Workers: 4
+ Concurrent Refinement Workers: 15
+ Periodic GC: Disabled
+
+Heap:
+ garbage-first heap   total 20480K, used 1818K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 1 young (1024K), 0 survivors (0K)
+ Metaspace       used 1527K, committed 1664K, reserved 1056768K
+  class space    used 128K, committed 192K, reserved 1048576K
+
+Heap Regions: E=young(eden), S=young(survivor), O=old, HS=humongous(starts), HC=humongous(continues), CS=collection set, F=free, OA=open archive, CA=closed archive, TAMS=top-at-mark-start (previous, next)
+|   0|0x00000000c0000000, 0x00000000c0022640, 0x00000000c0100000| 13%| O|  |TAMS 0x00000000c0000000, 0x00000000c0000000| Untracked 
+|   1|0x00000000c0100000, 0x00000000c019ee30, 0x00000000c0200000| 62%| O|  |TAMS 0x00000000c0100000, 0x00000000c0100000| Untracked 
+|   2|0x00000000c0200000, 0x00000000c021cb20, 0x00000000c0300000| 11%| O|  |TAMS 0x00000000c0200000, 0x00000000c0200000| Untracked 
+|   3|0x00000000c0300000, 0x00000000c034eeb0, 0x00000000c0400000| 30%| O|  |TAMS 0x00000000c0300000, 0x00000000c0300000| Untracked 
+|   4|0x00000000c0400000, 0x00000000c0476988, 0x00000000c0500000| 46%| O|  |TAMS 0x00000000c0400000, 0x00000000c0400000| Untracked 
+|   5|0x00000000c0500000, 0x00000000c05231a8, 0x00000000c0600000| 13%| O|  |TAMS 0x00000000c0500000, 0x00000000c0500000| Untracked 
+|   6|0x00000000c0600000, 0x00000000c0600000, 0x00000000c0700000|  0%| F|  |TAMS 0x00000000c0600000, 0x00000000c0600000| Untracked 
+|   7|0x00000000c0700000, 0x00000000c0700000, 0x00000000c0800000|  0%| F|  |TAMS 0x00000000c0700000, 0x00000000c0700000| Untracked 
+|   8|0x00000000c0800000, 0x00000000c0800000, 0x00000000c0900000|  0%| F|  |TAMS 0x00000000c0800000, 0x00000000c0800000| Untracked 
+|   9|0x00000000c0900000, 0x00000000c0900000, 0x00000000c0a00000|  0%| F|  |TAMS 0x00000000c0900000, 0x00000000c0900000| Untracked 
+|  10|0x00000000c0a00000, 0x00000000c0a00000, 0x00000000c0b00000|  0%| F|  |TAMS 0x00000000c0a00000, 0x00000000c0a00000| Untracked 
+|  11|0x00000000c0b00000, 0x00000000c0b00000, 0x00000000c0c00000|  0%| F|  |TAMS 0x00000000c0b00000, 0x00000000c0b00000| Untracked 
+|  12|0x00000000c0c00000, 0x00000000c0c00000, 0x00000000c0d00000|  0%| F|  |TAMS 0x00000000c0c00000, 0x00000000c0c00000| Untracked 
+|  13|0x00000000c0d00000, 0x00000000c0d00000, 0x00000000c0e00000|  0%| F|  |TAMS 0x00000000c0d00000, 0x00000000c0d00000| Untracked 
+|  14|0x00000000c0e00000, 0x00000000c0e00000, 0x00000000c0f00000|  0%| F|  |TAMS 0x00000000c0e00000, 0x00000000c0e00000| Untracked 
+|  15|0x00000000c0f00000, 0x00000000c0f00000, 0x00000000c1000000|  0%| F|  |TAMS 0x00000000c0f00000, 0x00000000c0f00000| Untracked 
+|  16|0x00000000c1000000, 0x00000000c1000000, 0x00000000c1100000|  0%| F|  |TAMS 0x00000000c1000000, 0x00000000c1000000| Untracked 
+|  17|0x00000000c1100000, 0x00000000c1100000, 0x00000000c1200000|  0%| F|  |TAMS 0x00000000c1100000, 0x00000000c1100000| Untracked 
+|  18|0x00000000c1200000, 0x00000000c1200000, 0x00000000c1300000|  0%| F|  |TAMS 0x00000000c1200000, 0x00000000c1200000| Untracked 
+|  19|0x00000000c1300000, 0x00000000c1373438, 0x00000000c1400000| 45%| E|  |TAMS 0x00000000c1300000, 0x00000000c1300000| Complete 
+
+Card table byte_map: [0x0000026e9a440000,0x0000026e9a640000] _byte_map_base: 0x0000026e99e40000
+
+Marking Bits (Prev, Next): (CMBitMap*) 0x0000026e807d87e0, (CMBitMap*) 0x0000026e807d87a0
+ Prev Bits: [0x0000026e9b840000, 0x0000026e9c840000)
+ Next Bits: [0x0000026e9a840000, 0x0000026e9b840000)
+
+Polling page: 0x0000026e81820000
+
+Metaspace:
+
+Usage:
+  Non-class:      1.37 MB used.
+      Class:    128.46 KB used.
+       Both:      1.49 MB used.
+
+Virtual space:
+  Non-class space:        8.00 MB reserved,       1.44 MB ( 18%) committed,  1 nodes.
+      Class space:        1.00 GB reserved,     192.00 KB ( <1%) committed,  1 nodes.
+             Both:        1.01 GB reserved,       1.62 MB ( <1%) committed. 
+
+Chunk freelists:
+   Non-Class:  3.86 MB
+       Class:  3.73 MB
+        Both:  7.59 MB
+
+MaxMetaspaceSize: unlimited
+CompressedClassSpaceSize: 1.00 GB
+Initial GC threshold: 21.00 MB
+Current GC threshold: 21.00 MB
+CDS: on
+MetaspaceReclaimPolicy: balanced
+ - commit_granule_bytes: 65536.
+ - commit_granule_words: 8192.
+ - virtual_space_node_default_size: 1048576.
+ - enlarge_chunks_in_place: 1.
+ - new_chunks_are_fully_committed: 0.
+ - uncommit_free_chunks: 1.
+ - use_allocation_guard: 0.
+ - handle_deallocations: 1.
+
+
+Internal statistics:
+
+num_allocs_failed_limit: 0.
+num_arena_births: 12.
+num_arena_deaths: 0.
+num_vsnodes_births: 2.
+num_vsnodes_deaths: 0.
+num_space_committed: 26.
+num_space_uncommitted: 0.
+num_chunks_returned_to_freelist: 0.
+num_chunks_taken_from_freelist: 25.
+num_chunk_merges: 0.
+num_chunk_splits: 14.
+num_chunks_enlarged: 9.
+num_purges: 0.
+num_inconsistent_stats: 0.
+
+CodeHeap 'non-profiled nmethods': size=119168Kb used=149Kb max_used=149Kb free=119018Kb
+ bounds [0x0000026e92340000, 0x0000026e925b0000, 0x0000026e997a0000]
+CodeHeap 'profiled nmethods': size=119104Kb used=1015Kb max_used=1015Kb free=118088Kb
+ bounds [0x0000026e8a7a0000, 0x0000026e8aa10000, 0x0000026e91bf0000]
+CodeHeap 'non-nmethods': size=7488Kb used=2808Kb max_used=2834Kb free=4679Kb
+ bounds [0x0000026e91bf0000, 0x0000026e91ec0000, 0x0000026e92340000]
+ total_blobs=1000 nmethods=599 adapters=311
+ compilation: enabled
+              stopped_count=0, restarted_count=0
+ full_count=0
+
+Compilation events (20 events):
+Event: 0.107 Thread 0x0000026e806d9490  592       3       java.lang.Character$UnicodeBlock::<init> (17 bytes)
+Event: 0.107 Thread 0x0000026e806cf7a0  593       3       java.lang.Character$Subset::<init> (24 bytes)
+Event: 0.107 Thread 0x0000026e806cf7a0 nmethod 593 0x0000026e8a898d10 code [0x0000026e8a898ec0, 0x0000026e8a899188]
+Event: 0.107 Thread 0x0000026e806d9490 nmethod 592 0x0000026e8a899290 code [0x0000026e8a899460, 0x0000026e8a8998f8]
+Event: 0.108 Thread 0x0000026e806cf7a0  594       1       java.lang.reflect.Field::getType (5 bytes)
+Event: 0.108 Thread 0x0000026e806d01c0  595       3       org.jpype.manager.TypeManager::getClass (31 bytes)
+Event: 0.108 Thread 0x0000026e806cf7a0 nmethod 594 0x0000026e9235f690 code [0x0000026e9235f820, 0x0000026e9235f8f8]
+Event: 0.108 Thread 0x0000026e806d01c0 nmethod 595 0x0000026e8a899a90 code [0x0000026e8a899ca0, 0x0000026e8a89a1d8]
+Event: 0.112 Thread 0x0000026e806de590 nmethod 552 0x0000026e9235fe10 code [0x0000026e9235ffc0, 0x0000026e92360838]
+Event: 0.112 Thread 0x0000026e806de590  589       4       java.util.HashMap::put (13 bytes)
+Event: 0.112 Thread 0x0000026e806cf7a0  597       3       java.lang.Enum::<init> (15 bytes)
+Event: 0.112 Thread 0x0000026e806cf7a0 nmethod 597 0x0000026e8a89a390 code [0x0000026e8a89a520, 0x0000026e8a89a6d8]
+Event: 0.113 Thread 0x0000026e806d7630  599       3       java.util.TreeMap::fixAfterInsertion (267 bytes)
+Event: 0.114 Thread 0x0000026e806d7630 nmethod 599 0x0000026e8a89a790 code [0x0000026e8a89ac40, 0x0000026e8a89d318]
+Event: 0.121 Thread 0x0000026e806d0be0 nmethod 584 0x0000026e92360d10 code [0x0000026e92360f20, 0x0000026e92362288]
+Event: 0.121 Thread 0x0000026e806d0be0  598 %     4       java.lang.PublicMethods$MethodList::filter @ 17 (104 bytes)
+Event: 0.124 Thread 0x0000026e806de590 nmethod 589 0x0000026e92362910 code [0x0000026e92362b20, 0x0000026e92363d88]
+Event: 0.124 Thread 0x0000026e806de590  591       4       java.util.HashMap::afterNodeInsertion (1 bytes)
+Event: 0.124 Thread 0x0000026e806de590 nmethod 591 0x0000026e92364490 code [0x0000026e92364600, 0x0000026e92364678]
+Event: 0.126 Thread 0x0000026e806d0be0 nmethod 598% 0x0000026e92364790 code [0x0000026e92364940, 0x0000026e923651d8]
+
+GC Heap History (2 events):
+Event: 0.109 GC heap before
+{Heap before GC invocations=0 (full 0):
+ garbage-first heap   total 260096K, used 6144K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 7 young (7168K), 0 survivors (0K)
+ Metaspace       used 1496K, committed 1600K, reserved 1056768K
+  class space    used 124K, committed 192K, reserved 1048576K
+}
+Event: 0.111 GC heap after
+{Heap after GC invocations=1 (full 1):
+ garbage-first heap   total 20480K, used 1818K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 0 young (0K), 0 survivors (0K)
+ Metaspace       used 1496K, committed 1600K, reserved 1056768K
+  class space    used 124K, committed 192K, reserved 1048576K
+}
+
+Deoptimization events (20 events):
+Event: 0.078 Thread 0x0000026e8081a870 Uncommon trap: trap_request=0xffffffbe fr.pc=0x0000026e92352a94 relative=0x0000000000000374
+Event: 0.078 Thread 0x0000026e8081a870 Uncommon trap: reason=profile_predicate action=maybe_recompile pc=0x0000026e92352a94 method=java.lang.StringLatin1.indexOf([BI[BII)I @ 18 c2
+Event: 0.078 Thread 0x0000026e8081a870 DEOPT PACKING pc=0x0000026e92352a94 sp=0x000000a60aded620
+Event: 0.078 Thread 0x0000026e8081a870 DEOPT UNPACKING pc=0x0000026e91c423a3 sp=0x000000a60aded580 mode 2
+Event: 0.113 Thread 0x0000026e8081a870 Uncommon trap: trap_request=0xffffffbe fr.pc=0x0000026e923606dc relative=0x000000000000071c
+Event: 0.113 Thread 0x0000026e8081a870 Uncommon trap: reason=profile_predicate action=maybe_recompile pc=0x0000026e923606dc method=java.lang.PublicMethods$MethodList.filter([Ljava/lang/reflect/Method;Ljava/lang/String;[Ljava/lang/Class;Z)Ljava/lang/PublicMethods$MethodList; @ 21 c2
+Event: 0.113 Thread 0x0000026e8081a870 DEOPT PACKING pc=0x0000026e923606dc sp=0x000000a60adeb870
+Event: 0.113 Thread 0x0000026e8081a870 DEOPT UNPACKING pc=0x0000026e91c423a3 sp=0x000000a60adeb828 mode 2
+Event: 0.113 Thread 0x0000026e8081a870 Uncommon trap: trap_request=0xffffffbe fr.pc=0x0000026e923606dc relative=0x000000000000071c
+Event: 0.113 Thread 0x0000026e8081a870 Uncommon trap: reason=profile_predicate action=maybe_recompile pc=0x0000026e923606dc method=java.lang.PublicMethods$MethodList.filter([Ljava/lang/reflect/Method;Ljava/lang/String;[Ljava/lang/Class;Z)Ljava/lang/PublicMethods$MethodList; @ 21 c2
+Event: 0.113 Thread 0x0000026e8081a870 DEOPT PACKING pc=0x0000026e923606dc sp=0x000000a60adeb870
+Event: 0.113 Thread 0x0000026e8081a870 DEOPT UNPACKING pc=0x0000026e91c423a3 sp=0x000000a60adeb828 mode 2
+Event: 0.113 Thread 0x0000026e8081a870 Uncommon trap: trap_request=0xffffffbe fr.pc=0x0000026e923606dc relative=0x000000000000071c
+Event: 0.113 Thread 0x0000026e8081a870 Uncommon trap: reason=profile_predicate action=maybe_recompile pc=0x0000026e923606dc method=java.lang.PublicMethods$MethodList.filter([Ljava/lang/reflect/Method;Ljava/lang/String;[Ljava/lang/Class;Z)Ljava/lang/PublicMethods$MethodList; @ 21 c2
+Event: 0.113 Thread 0x0000026e8081a870 DEOPT PACKING pc=0x0000026e923606dc sp=0x000000a60adeb7c0
+Event: 0.113 Thread 0x0000026e8081a870 DEOPT UNPACKING pc=0x0000026e91c423a3 sp=0x000000a60adeb778 mode 2
+Event: 0.113 Thread 0x0000026e8081a870 Uncommon trap: trap_request=0xffffffbe fr.pc=0x0000026e923606dc relative=0x000000000000071c
+Event: 0.113 Thread 0x0000026e8081a870 Uncommon trap: reason=profile_predicate action=maybe_recompile pc=0x0000026e923606dc method=java.lang.PublicMethods$MethodList.filter([Ljava/lang/reflect/Method;Ljava/lang/String;[Ljava/lang/Class;Z)Ljava/lang/PublicMethods$MethodList; @ 21 c2
+Event: 0.113 Thread 0x0000026e8081a870 DEOPT PACKING pc=0x0000026e923606dc sp=0x000000a60adeb870
+Event: 0.113 Thread 0x0000026e8081a870 DEOPT UNPACKING pc=0x0000026e91c423a3 sp=0x000000a60adeb828 mode 2
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (5 events):
+Event: 0.044 Thread 0x0000026e8081a870 Exception <a 'java/lang/NoClassDefFoundError'{0x00000000cfb96b38}: org/jpype/classloader/DynamicClassLoader> (0x00000000cfb96b38) 
+thrown [s\open\src\hotspot\share\classfile\systemDictionary.cpp, line 245]
+Event: 0.068 Thread 0x0000026e8081a870 Exception <a 'sun/nio/fs/WindowsException'{0x00000000cf922f98}> (0x00000000cf922f98) 
+thrown [s\open\src\hotspot\share\prims\jni.cpp, line 516]
+Event: 0.069 Thread 0x0000026e8081a870 Exception <a 'sun/nio/fs/WindowsException'{0x00000000cf923ae0}> (0x00000000cf923ae0) 
+thrown [s\open\src\hotspot\share\prims\jni.cpp, line 516]
+Event: 0.081 Thread 0x0000026e8081a870 Exception <a 'java/lang/NoSuchMethodError'{0x00000000cf9b72a8}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeInterface(java.lang.Object, java.lang.Object)'> (0x00000000cf9b72a8) 
+thrown [s\open\src\hotspot\share\interpreter\linkResolver.cpp, line 759]
+Event: 0.082 Thread 0x0000026e8081a870 Exception <a 'java/lang/IncompatibleClassChangeError'{0x00000000cf9ba968}: Found class java.lang.Object, but interface was expected> (0x00000000cf9ba968) 
+thrown [s\open\src\hotspot\share\interpreter\linkResolver.cpp, line 826]
+
+VM Operations (6 events):
+Event: 0.045 Executing VM operation: HandshakeAllThreads
+Event: 0.045 Executing VM operation: HandshakeAllThreads done
+Event: 0.108 Executing VM operation: G1CollectFull
+Event: 0.111 Executing VM operation: G1CollectFull done
+Event: 0.134 Executing VM operation: ThreadDump
+Event: 0.134 Executing VM operation: ThreadDump done
+
+Events (20 events):
+Event: 0.093 loading class java/lang/Deprecated
+Event: 0.093 loading class java/lang/Deprecated done
+Event: 0.093 loading class java/lang/annotation/Documented
+Event: 0.093 loading class java/lang/annotation/Documented done
+Event: 0.097 loading class java/nio/charset/CharacterCodingException
+Event: 0.097 loading class java/nio/charset/CharacterCodingException done
+Event: 0.104 loading class java/lang/Byte$ByteCache
+Event: 0.104 loading class java/lang/Byte$ByteCache done
+Event: 0.113 loading class java/lang/constant/ClassDesc
+Event: 0.113 loading class java/lang/constant/ClassDesc done
+Event: 0.113 loading class java/lang/Enum$EnumDesc
+Event: 0.113 loading class java/lang/constant/DynamicConstantDesc
+Event: 0.113 loading class java/lang/constant/DynamicConstantDesc done
+Event: 0.113 loading class java/lang/Enum$EnumDesc done
+Event: 0.113 loading class java/io/ObjectStreamException
+Event: 0.113 loading class java/io/ObjectStreamException done
+Event: 0.125 loading class jdk/internal/misc/Signal$1
+Event: 0.125 loading class jdk/internal/misc/Signal$1 done
+Event: 0.125 Thread 0x0000026e8081c080 Thread added: 0x0000026e8081c080
+Event: 0.125 Thread 0x0000026e80816eb0 Thread added: 0x0000026e80816eb0
+
+
+Dynamic libraries:
+0x00007ff712e40000 - 0x00007ff712e5a000 	C:\Users\User\AppData\Local\Programs\Python\Python311\python.exe
+0x00007ff9f8390000 - 0x00007ff9f85a4000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ff9f75d0000 - 0x00007ff9f7694000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007ff9f5830000 - 0x00007ff9f5bd4000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007ff9f5be0000 - 0x00007ff9f5cf1000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007ff9f2200000 - 0x00007ff9f221b000 	C:\Users\User\AppData\Local\Programs\Python\Python311\VCRUNTIME140.dll
+0x00007ff99d290000 - 0x00007ff99d85d000 	C:\Users\User\AppData\Local\Programs\Python\Python311\python311.dll
+0x00007ff9f7490000 - 0x00007ff9f7501000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007ff9f6e00000 - 0x00007ff9f6f17000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007ff9f7510000 - 0x00007ff9f75c0000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007ff9f7f00000 - 0x00007ff9f7fa7000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007ff9e4960000 - 0x00007ff9e496a000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007ff9f76c0000 - 0x00007ff9f7766000 	C:\WINDOWS\System32\sechost.dll
+0x00007ff9f5130000 - 0x00007ff9f5158000 	C:\WINDOWS\SYSTEM32\bcrypt.dll
+0x00007ff9f5d00000 - 0x00007ff9f5d7a000 	C:\WINDOWS\System32\bcryptprimitives.dll
+0x0000026eacd10000 - 0x0000026eacd1f000 	C:\Users\User\AppData\Local\Programs\Python\Python311\python3.DLL
+0x00007ff9f2a50000 - 0x00007ff9f2a59000 	C:\Users\User\AppData\Local\Programs\Python\Python311\DLLs\select.pyd
+0x00007ff9e3290000 - 0x00007ff9e32a5000 	C:\Users\User\AppData\Local\Programs\Python\Python311\DLLs\_socket.pyd
+0x00007ff9f42c0000 - 0x00007ff9f42ed000 	C:\WINDOWS\SYSTEM32\IPHLPAPI.DLL
+0x00007ff9e3260000 - 0x00007ff9e328d000 	C:\Users\User\AppData\Local\Programs\Python\Python311\DLLs\_ssl.pyd
+0x00007ff9f5df0000 - 0x00007ff9f5f57000 	C:\WINDOWS\System32\CRYPT32.dll
+0x00007ff989900000 - 0x00007ff989df0000 	C:\Users\User\AppData\Local\Programs\Python\Python311\DLLs\libcrypto-3.dll
+0x00007ff9f70a0000 - 0x00007ff9f724a000 	C:\WINDOWS\System32\USER32.dll
+0x00007ff9d8ec0000 - 0x00007ff9d8f83000 	C:\Users\User\AppData\Local\Programs\Python\Python311\DLLs\libssl-3.dll
+0x00007ff9f6000000 - 0x00007ff9f6026000 	C:\WINDOWS\System32\win32u.dll
+0x00007ff9f7360000 - 0x00007ff9f7389000 	C:\WINDOWS\System32\GDI32.dll
+0x00007ff9f6030000 - 0x00007ff9f6149000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007ff9f5f60000 - 0x00007ff9f5ffa000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007ff9f82f0000 - 0x00007ff9f8321000 	C:\WINDOWS\System32\IMM32.DLL
+0x00007ff9e3240000 - 0x00007ff9e3255000 	C:\Users\User\AppData\Local\Programs\Python\Python311\DLLs\_bz2.pyd
+0x00007ff9e3210000 - 0x00007ff9e3239000 	C:\Users\User\AppData\Local\Programs\Python\Python311\DLLs\_lzma.pyd
+0x00007ff9f21f0000 - 0x00007ff9f21f9000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\markupsafe\_speedups.cp311-win_amd64.pyd
+0x00007ff9dfb90000 - 0x00007ff9dfba1000 	C:\Users\User\AppData\Local\Programs\Python\Python311\DLLs\_hashlib.pyd
+0x00007ff9dfb70000 - 0x00007ff9dfb8e000 	C:\Users\User\AppData\Local\Programs\Python\Python311\DLLs\_ctypes.pyd
+0x00007ff9f7860000 - 0x00007ff9f79fc000 	C:\WINDOWS\System32\ole32.dll
+0x00007ff9f7b70000 - 0x00007ff9f7efa000 	C:\WINDOWS\System32\combase.dll
+0x00007ff9f7fb0000 - 0x00007ff9f8087000 	C:\WINDOWS\System32\OLEAUT32.dll
+0x00007ff9f0900000 - 0x00007ff9f090b000 	C:\Users\User\AppData\Local\Programs\Python\Python311\DLLs\libffi-8.dll
+0x00007ff9d8da0000 - 0x00007ff9d8eb8000 	C:\Users\User\AppData\Local\Programs\Python\Python311\DLLs\unicodedata.pyd
+0x00007ff9dfa10000 - 0x00007ff9dfa4f000 	C:\Users\User\AppData\Local\Programs\Python\Python311\DLLs\_decimal.pyd
+0x00007ff9e2280000 - 0x00007ff9e2287000 	C:\Users\User\AppData\Local\Programs\Python\Python311\DLLs\_uuid.pyd
+0x00007ff9f65d0000 - 0x00007ff9f6de6000 	C:\WINDOWS\System32\shell32.DLL
+0x00007ff9df9f0000 - 0x00007ff9dfa01000 	C:\Users\User\AppData\Local\Programs\Python\Python311\DLLs\_asyncio.pyd
+0x00007ff9df990000 - 0x00007ff9df99e000 	C:\Users\User\AppData\Local\Programs\Python\Python311\DLLs\_overlapped.pyd
+0x00007ff9f4cd0000 - 0x00007ff9f4d39000 	C:\WINDOWS\system32\mswsock.dll
+0x00007ff9df960000 - 0x00007ff9df990000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\sqlalchemy\cyextension\collections.cp311-win_amd64.pyd
+0x00007ff9df940000 - 0x00007ff9df958000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\sqlalchemy\cyextension\immutabledict.cp311-win_amd64.pyd
+0x00007ff9df920000 - 0x00007ff9df934000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\sqlalchemy\cyextension\processors.cp311-win_amd64.pyd
+0x00007ff9df900000 - 0x00007ff9df914000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\sqlalchemy\cyextension\resultproxy.cp311-win_amd64.pyd
+0x00007ff9df2d0000 - 0x00007ff9df2e7000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\sqlalchemy\cyextension\util.cp311-win_amd64.pyd
+0x00007ff9df2b0000 - 0x00007ff9df2c5000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\greenlet\_greenlet.cp311-win_amd64.pyd
+0x00007ff9ccb00000 - 0x00007ff9ccb8d000 	C:\WINDOWS\SYSTEM32\MSVCP140.dll
+0x00007ff9d95e0000 - 0x00007ff9d95ec000 	C:\Users\User\AppData\Local\Programs\Python\Python311\VCRUNTIME140_1.dll
+0x00007ff9868c0000 - 0x00007ff988975000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\numpy\.libs\libopenblas64__v0.3.23-246-g3d31191b-gcc_10_3_0.dll
+0x00007ff9cd500000 - 0x00007ff9cd7e0000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\numpy\core\_multiarray_umath.cp311-win_amd64.pyd
+0x00007ff9d9560000 - 0x00007ff9d9575000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\numpy\core\_multiarray_tests.cp311-win_amd64.pyd
+0x00007ff9d9540000 - 0x00007ff9d955e000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\numpy\linalg\_umath_linalg.cp311-win_amd64.pyd
+0x00007ff9d9200000 - 0x00007ff9d9220000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\numpy\fft\_pocketfft_internal.cp311-win_amd64.pyd
+0x00007ff9d8d10000 - 0x00007ff9d8da0000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\numpy\random\mtrand.cp311-win_amd64.pyd
+0x00007ff9d8a90000 - 0x00007ff9d8ab7000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\numpy\random\bit_generator.cp311-win_amd64.pyd
+0x00007ff9d8a60000 - 0x00007ff9d8a8d000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\numpy\random\_common.cp311-win_amd64.pyd
+0x00007ff9ce290000 - 0x00007ff9ce2d0000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\numpy\random\_bounded_integers.cp311-win_amd64.pyd
+0x00007ff9d91e0000 - 0x00007ff9d91f4000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\numpy\random\_mt19937.cp311-win_amd64.pyd
+0x00007ff9d8c40000 - 0x00007ff9d8c53000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\numpy\random\_philox.cp311-win_amd64.pyd
+0x00007ff9d4f10000 - 0x00007ff9d4f26000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\numpy\random\_pcg64.cp311-win_amd64.pyd
+0x00007ff9d8d00000 - 0x00007ff9d8d10000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\numpy\random\_sfc64.cp311-win_amd64.pyd
+0x00007ff9ce190000 - 0x00007ff9ce234000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\numpy\random\_generator.cp311-win_amd64.pyd
+0x00007ff9cdee0000 - 0x00007ff9cdfc4000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\interval.cp311-win_amd64.pyd
+0x00007ff9cdce0000 - 0x00007ff9cde45000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\hashtable.cp311-win_amd64.pyd
+0x00007ff9d09c0000 - 0x00007ff9d09e8000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\missing.cp311-win_amd64.pyd
+0x00007ff9ce270000 - 0x00007ff9ce28d000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\tslibs\dtypes.cp311-win_amd64.pyd
+0x00007ff9ce170000 - 0x00007ff9ce18b000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\tslibs\np_datetime.cp311-win_amd64.pyd
+0x00007ff9ce140000 - 0x00007ff9ce16b000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\tslibs\conversion.cp311-win_amd64.pyd
+0x00007ff9d4f00000 - 0x00007ff9d4f0d000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\tslibs\base.cp311-win_amd64.pyd
+0x00007ff9cdbb0000 - 0x00007ff9cdc4f000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\tslibs\offsets.cp311-win_amd64.pyd
+0x00007ff9ce0d0000 - 0x00007ff9ce136000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\tslibs\timestamps.cp311-win_amd64.pyd
+0x00007ff9cdeb0000 - 0x00007ff9cdedd000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\tslibs\nattype.cp311-win_amd64.pyd
+0x00007ff9cdb40000 - 0x00007ff9cdba2000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\tslibs\timedeltas.cp311-win_amd64.pyd
+0x00007ff9cde80000 - 0x00007ff9cdeaf000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\tslibs\timezones.cp311-win_amd64.pyd
+0x00007ff9ce0c0000 - 0x00007ff9ce0cd000 	C:\Users\User\AppData\Local\Programs\Python\Python311\DLLs\_zoneinfo.pyd
+0x0000026ed7d80000 - 0x0000026ed7d83000 	C:\WINDOWS\SYSTEM32\tzres.dll
+0x00007ff9cdb00000 - 0x00007ff9cdb3a000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\tslibs\fields.cp311-win_amd64.pyd
+0x00007ff9ce0b0000 - 0x00007ff9ce0c0000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\tslibs\ccalendar.cp311-win_amd64.pyd
+0x00007ff9cdac0000 - 0x00007ff9cdaf7000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\tslibs\tzconversion.cp311-win_amd64.pyd
+0x00007ff9cdcd0000 - 0x00007ff9cdce0000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\properties.cp311-win_amd64.pyd
+0x00007ff9cda70000 - 0x00007ff9cdab6000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\tslibs\parsing.cp311-win_amd64.pyd
+0x00007ff9cda30000 - 0x00007ff9cda69000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\tslibs\strptime.cp311-win_amd64.pyd
+0x00007ff9cd8d0000 - 0x00007ff9cd921000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\tslibs\period.cp311-win_amd64.pyd
+0x00007ff9cda00000 - 0x00007ff9cda29000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\tslibs\vectorized.cp311-win_amd64.pyd
+0x00007ff9cdcc0000 - 0x00007ff9cdccf000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\ops_dispatch.cp311-win_amd64.pyd
+0x00007ff9b6b00000 - 0x00007ff9b6c7b000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\algos.cp311-win_amd64.pyd
+0x00007ff9cd480000 - 0x00007ff9cd4f6000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\lib.cp311-win_amd64.pyd
+0x00007ff9cd870000 - 0x00007ff9cd894000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\hashing.cp311-win_amd64.pyd
+0x00007ff9cd380000 - 0x00007ff9cd3b3000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\tslib.cp311-win_amd64.pyd
+0x00007ff9cd840000 - 0x00007ff9cd86d000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\ops.cp311-win_amd64.pyd
+0x00007ff9cd9e0000 - 0x00007ff9cd9f4000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\arrays.cp311-win_amd64.pyd
+0x00007ff9c7ff0000 - 0x00007ff9c80ab000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\sparse.cp311-win_amd64.pyd
+0x00007ff9cdcb0000 - 0x00007ff9cdcbc000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\reduction.cp311-win_amd64.pyd
+0x00007ff9cd470000 - 0x00007ff9cd47e000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\indexing.cp311-win_amd64.pyd
+0x00007ff9c7940000 - 0x00007ff9c79d1000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\index.cp311-win_amd64.pyd
+0x00007ff9cd340000 - 0x00007ff9cd37f000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\internals.cp311-win_amd64.pyd
+0x00007ff9b6970000 - 0x00007ff9b6af5000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\join.cp311-win_amd64.pyd
+0x00007ff9cd310000 - 0x00007ff9cd33a000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\writers.cp311-win_amd64.pyd
+0x00007ff9c54d0000 - 0x00007ff9c551e000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\window\aggregations.cp311-win_amd64.pyd
+0x00007ff9c7f80000 - 0x00007ff9c7fa3000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\window\indexers.cp311-win_amd64.pyd
+0x00007ff9c5450000 - 0x00007ff9c5484000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\reshape.cp311-win_amd64.pyd
+0x00007ff99e090000 - 0x00007ff99e225000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\groupby.cp311-win_amd64.pyd
+0x00007ff9c6c40000 - 0x00007ff9c6c53000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\testing.cp311-win_amd64.pyd
+0x00007ff9c5330000 - 0x00007ff9c538b000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\parsers.cp311-win_amd64.pyd
+0x00007ff9c5310000 - 0x00007ff9c5323000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\json.cp311-win_amd64.pyd
+0x00007ff9cd460000 - 0x00007ff9cd469000 	C:\Users\User\AppData\Local\Programs\Python\Python311\DLLs\_queue.pyd
+0x00007ff9b68f0000 - 0x00007ff9b6964000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\_jpype.cp311-win_amd64.pyd
+0x00007ff9cd300000 - 0x00007ff9cd30a000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\sklearn\__check_build\_check_build.cp311-win_amd64.pyd
+0x00007ff9c52d0000 - 0x00007ff9c5301000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\sklearn\.libs\vcomp140.dll
+0x00007ff9b6860000 - 0x00007ff9b68ee000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\sklearn\.libs\msvcp140.dll
+0x00007ff9b6840000 - 0x00007ff9b6857000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\_lib\_ccallback_c.cp311-win_amd64.pyd
+0x00007ff98d390000 - 0x00007ff98d79c000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\sparse\_sparsetools.cp311-win_amd64.pyd
+0x00007ff9b50b0000 - 0x00007ff9b513f000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\sparse\_csparsetools.cp311-win_amd64.pyd
+0x00007ff9b5060000 - 0x00007ff9b50a8000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\sparse\linalg\_isolve\_iterative.cp311-win_amd64.pyd
+0x00007ff984a00000 - 0x00007ff9868bd000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy.libs\libopenblas_v0.3.20-571-g3dec11c6-gcc_10_3_0-c2315440d6b6cef5037bad648efc8c59.dll
+0x00007ff9b4d30000 - 0x00007ff9b4dd5000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\linalg\_fblas.cp311-win_amd64.pyd
+0x00007ff99d070000 - 0x00007ff99d28f000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\linalg\_flapack.cp311-win_amd64.pyd
+0x00007ff9b4c60000 - 0x00007ff9b4cd6000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\linalg\_cythonized_array_utils.cp311-win_amd64.pyd
+0x00007ff99e000000 - 0x00007ff99e083000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\linalg\cython_lapack.cp311-win_amd64.pyd
+0x00007ff9b4c10000 - 0x00007ff9b4c53000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\linalg\_solve_toeplitz.cp311-win_amd64.pyd
+0x00007ff99e780000 - 0x00007ff99e7be000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\linalg\_decomp_lu_cython.cp311-win_amd64.pyd
+0x00007ff99dfc0000 - 0x00007ff99dffd000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\linalg\_matfuncs_sqrtm_triu.cp311-win_amd64.pyd
+0x00007ff99ddc0000 - 0x00007ff99de27000 	C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\linalg\_matfuncs_expm.cp311-win_amd64.pyd
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Users\User\AppData\Local\Programs\Python\Python311;C:\WINDOWS\SYSTEM32;C:\Users\User\AppData\Local\Programs\Python\Python311\DLLs;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\markupsafe;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\sqlalchemy\cyextension;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\greenlet;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\numpy\.libs;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\numpy\core;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\numpy\linalg;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\numpy\fft;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\numpy\random;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\tslibs;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\pandas\_libs\window;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\sklearn\__check_build;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\sklearn\.libs;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\_lib;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\sparse;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\sparse\linalg\_isolve;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy.libs;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\linalg;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\sparse\linalg\_dsolve;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\sparse\linalg\_eigen\arpack;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\sparse\csgraph;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\special;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\spatial;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\spatial\transform;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\ndimage;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\optimize;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\optimize\_trlib;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\optimize\_lsq;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\optimize\_highs;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\integrate;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\stats;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\stats\_boost;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\interpolate;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\stats\_levy_stable;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\_lib\_uarray;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\fft\_pocketfft;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\scipy\stats\_rcont;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\sklearn\utils;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\sklearn\preprocessing;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\sklearn\feature_extraction;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\sklearn\metrics\cluster;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\sklearn\metrics;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\sklearn\metrics\_pairwise_distances_reduction;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\lxml;C:\Program Files\Java\jdk-17\bin\server;C:\Program Files\Java\jdk-17\bin
+
+VM Arguments:
+jvm_args: -Dfile.encoding=UTF8 -ea -Xmx1024m 
+java_command: <unknown>
+java_class_path (initial): C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\konlpy\java;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\konlpy\java\bin;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\konlpy\java\aho-corasick.jar;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\konlpy\java\jhannanum-0.8.4.jar;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\konlpy\java\kkma-2.0.jar;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\konlpy\java\komoran-3.0.jar;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\konlpy\java\open-korean-text-2.1.0.jar;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\konlpy\java\scala-library-2.12.3.jar;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\konlpy\java\shineware-common-1.0.jar;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\konlpy\java\shineware-ds-1.0.jar;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\konlpy\java\snakeyaml-1.12.jar;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\konlpy\java\twitter-text-1.14.7.jar;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\konlpy\java\jhannanum-0.8.4.jar;C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Lib\site-packages\konlpy\java\kkma-2.0.jar;C:\Users\User\Downloads\TeamPrjSample-main\Team
+Launcher Type: generic
+
+[Global flags]
+     intx CICompilerCount                          = 12                                        {product} {ergonomic}
+     uint ConcGCThreads                            = 4                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 15                                        {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 1048576                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 266338304                                 {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 1073741824                                {product} {command line}
+   size_t MaxNewSize                               = 643825664                                 {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 1048576                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 7602480                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122027880                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122027880                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+   size_t SoftMaxHeapSize                          = 1073741824                             {manageable} {ergonomic}
+     bool UseCompressedClassPointers               = true                           {product lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags
+ #1: stderr all=off uptime,level,tags
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk-17
+CLASSPATH=C:\Program Files\Java\jdk-17\lib
+PATH=C:\Users\User\Downloads\TeamPrjSample-main\TeamPrjSample-main\Team_bck\pythonProject\venv\Scripts;C:\app\User\product\11.2.0\dbhome_1\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files\Java\jdk-17\bin;C:\Program Files (x86)\VMware\VMware Player\bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Bandizip\;C:\Program Files\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\nodejs\;C:\Users\User\AppData\Local\Microsoft\WindowsApps;C:\Users\User\AppData\Local\Microsoft\WindowsApps;;C:\Users\User\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2023.1.3\bin;;C:\Program Files\JetBrains\PyCharm Community Edition 2023.1.3\bin;;C:\Users\User\AppData\Roaming\npm
+USERNAME=User
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 151 Stepping 2, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS:
+ Windows 11 , 64 bit Build 22621 (10.0.22621.2070)
+OS uptime: 0 days 3:36 hours
+Hyper-V role detected
+
+CPU: total 20 (initial active 20) (10 cores per cpu, 2 threads per core) family 6 model 151 stepping 2 microcode 0x26, cx8, cmov, fxsr, ht, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, erms, clmul, bmi1, bmi2, adx, sha, fma, vzeroupper, clflush, clflushopt, clwb, hv
+
+Memory: 4k page, system-wide physical 16154M (8083M free)
+TotalPageFile size 24858M (AvailPageFile size 11078M)
+current process WorkingSet (physical memory assigned to process): 191M, peak: 198M
+current process commit charge ("private bytes"): 1468M, peak: 1726M
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (17.0.6+9-LTS-190) for windows-amd64 JRE (17.0.6+9-LTS-190), built on Dec  6 2022 15:53:54 by "mach5one" with MS VC++ 17.1 (VS2022)
+
+END.

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns="http://www.w3.org/1999/html">
+
 <head>
     <meta charset="UTF-8">
     <title>애니메이션-상품 매칭 서비스</title>
@@ -13,6 +14,7 @@
 
     <!-- Bootstrap JS (Optional, if you want to use dropdown functionality) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
     <style>
         body {
@@ -20,11 +22,11 @@
             margin: 0;
         }
 
+        /*
         body > not(.wrapper){
            background-color: #E3FFDD;
-
         }
-
+*/
         .wrapper {
             padding: 20px;
             display: flex;
@@ -33,12 +35,12 @@
             justify-content: space-between;
         }
 
-        .wrapper > div {
+        .wrapper>div {
             border: 1px solid #000;
             box-sizing: border-box;
         }
 
-        .wrapper > div:last-child {
+        .wrapper>div:last-child {
             border-right: 1px;
         }
 
@@ -57,13 +59,13 @@
             display: flex;
             flex-direction: row;
             align-items: center;
-            justfy-content: center;
+            justify-content: center;
             width: 100%;
             height: 100%;
 
         }
 
-       .btn-container {
+        .btn-container {
             display: flex;
             flex-direction: row;
             margin-left: auto;
@@ -84,7 +86,7 @@
         .maincon {
             background-color: #E6E2FF;
             display: flex;
-            justify-center: space-between;
+            justify-content: space-between;
             align-items: center;
             padding: 10px;
             margin-left: 20px;
@@ -93,7 +95,8 @@
             height: 700px;
         }
 
-        .image-upload-section, .image-generated-section {
+        .image-upload-section,
+        .image-generated-section {
             flex: 1;
             margin: 10px;
             display: flex;
@@ -119,12 +122,14 @@
 
         }
 
-        .header, footer {
+        .header,
+        footer {
             text-align: center;
             background-color: #FFFFFF;
             border: 2px solid #000000;
             margin-right: 10px;
             margin-left: 10px;
+            background-image: url('static/sample/pororoOper35.png');
         }
 
         h1 {
@@ -148,7 +153,7 @@
             width: 220px;
             margin-bottom: 50px;
             text-align: center;
-            justify-content: center;animeinfo.xlsx
+            justify-content: center;
 
         }
 
@@ -166,7 +171,8 @@
 
         }
 
-        #uploadImage, #deleteImage {
+        #uploadImage,
+        #deleteImage {
             background-color: #9370db;
 
         }
@@ -181,7 +187,7 @@
             background-position: center;
             overflow: hidden;
             border: none;
-            text-size: 20px;
+            font-size: 20px;
         }
 
         .dropdown-btn {
@@ -195,7 +201,6 @@
             font-size: 20px;
             max-width: 220px;
             opacity: 1;
-
         }
 
         .dropdown-btn:hover {
@@ -206,7 +211,7 @@
             background-color: #F0F0F0;
         }
 
-        #categoryDropdown .dropdown-btn{
+        #categoryDropdown .dropdown-btn {
             background-image: url('static/sample/food.png');
             font-weight: bold;
             font-size: 20px;
@@ -217,21 +222,21 @@
             background-image: url('static/sample/mood.png');
             font-weight: bold;
             font-size: 20px;
-            width:100%;
+            width: 100%;
             max-width: 220px;
         }
 
         #personalityDropdown .dropdown-btn {
             background-image: url('static/sample/personal.png');
             font-weight: bold;
-            width:100%;
+            width: 100%;
             max-width: 220px;
         }
 
         #ageDropdown .dropdown-btn {
             background-image: url('static/sample/age.png');
             font-weight: bold;
-            width:100%;
+            width: 100%;
             max-width: 220px;
         }
 
@@ -264,7 +269,8 @@
 
         }
 
-        .title1, .title2 {
+        .title1,
+        .title2 {
             width: 220px;
             height: 80px;
 
@@ -297,254 +303,12 @@
             bottom: 40px;
         }
 
+        .center {
+            text-align: center;
+        }
     </style>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-
-            // 이미지 업로드 처리
-            document.getElementById("imageUpload").addEventListener("change", function(e) {
-                const file = e.target.files[0];
-                if (file && file.type.startsWith("image/")) {
-                    const reader = new FileReader();
-                    reader.onload = function(event) {
-                        const uploadImage = document.getElementById("uploadImage");
-                        const deleteButton = document.getElementById("deleteImage");
-
-                        uploadImage.src = event.target.result;
-                        uploadImage.style.width = "300px";
-                        uploadImage.style.height = "300px";
-                        deleteButton.style.display = "block";
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-
-            // 업로드 버튼에도 해당 리스너 적용
-             document.querySelector('button[type="submit"]').addEventListener('click', function(e) {
-                e.preventDefault();
-
-                document.getElementById('imageUpload').click();
-            });
-
-            // 이미지 업로드 시 프리뷰 보여주기 함수
-            document.getElementById("imageGenerate").addEventListener("change", function(e) {
-                const file = e.target.files[0];
-                if (file && file.type.startsWith("image/")) {
-                    const reader = new FileReader();
-                    reader.onload = function(event) {
-                        const deleteButton = document.getElementById("deleteImage");
-                        const previewImage = document.getElementById("generatedImagePreview");
-
-                        previewImage.src = event.target.result;
-                        previewImage.style.display = "block";
-                        deleteButton.style.display = "block";
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-
-            // 이미지 삭제 처리
-            document.getElementById("deleteImage").addEventListener("click", function() {
-                const uploadImage = document.getElementById("uploadImage");
-                const generatedImagePreview = document.getElementById("generatedImagePreview");
-                const imageUpload = document.getElementById("imageUpload");
-                const imageGenerate = document.getElementById("imageGenerate");
-
-                if (generatedImagePreview.src !== "static/sample/upload.png") {
-                    generatedImagePreview.src = "static/sample/upload.png";
-                    imageGenerate.value = ""; // input value 초기화
-                } else if (uploadImage.src !== "static/sample/upload.png") {
-                    uploadImage.src = "static/sample/upload.png";
-                    uploadImage.style.width = "300px";
-                    uploadImage.style.height = "300px";
-                    imageUpload.value = ""; // input value 초기화
-                }
-            });
-
-            // 드롭다운 메뉴 보이기 & 숨기기
-            const categoryBtn = document.getElementById('categoryBtn');
-            const dropdownMenu = document.getElementById('dropdownMenu');
-
-            categoryBtn.addEventListener('mouseenter', () => dropdownMenu.style.display = 'block');
-            categoryBtn.addEventListener('mouseleave', () => dropdownMenu.style.display = 'none');
-            dropdownMenu.addEventListener('mouseenter', () => dropdownMenu.style.display = 'block');
-            dropdownMenu.addEventListener('mouseleave', () => dropdownMenu.style.display = 'none');
-
-            // 나머지 드롭다운 메뉴 보이기 & 숨기기
-            const themeDropdown = document.getElementById('themeDropdown');
-            const personalityDropdown = document.getElementById('personalityDropdown');
-            const ageDropdown = document.getElementById('ageDropdown');
-
-            // 테마 드롭다운 메뉴에 마우스 오버 & 아웃 이벤트 리스너 추가
-            themeDropdown.addEventListener('mouseenter', () => themeDropdown.querySelector('.dropdown-menu').style.display = 'block');
-            themeDropdown.addEventListener('mouseleave', () => themeDropdown.querySelector('.dropdown-menu').style.display = 'none');
-
-            // 성격 드롭다운 메뉴에 마우스 오버 & 아웃 이벤트 리스너 추가
-            personalityDropdown.addEventListener('mouseenter', () => personalityDropdown.querySelector('.dropdown-menu').style.display = 'block');
-            personalityDropdown.addEventListener('mouseleave', () => personalityDropdown.querySelector('.dropdown-menu').style.display = 'none');
-
-            // 나이 드롭다운 메뉴에 마우스 오버 & 아웃 이벤트 리스너 추가
-            ageDropdown.addEventListener('mouseenter', () => ageDropdown.querySelector('.dropdown-menu').style.display = 'block');
-            ageDropdown.addEventListener('mouseleave', () => ageDropdown.querySelector('.dropdown-menu').style.display = 'none');
-
-            // 각각의 드롭다운에 대한 처리
-            const dropdowns = [
-                {btn: 'categoryBtn', menu: 'categoryDropdown'},
-                {btn: 'themeDropdown', menu: 'themeMenu'},
-                {btn: 'personalityDropdown', menu: 'personalityMenu'},
-                {btn: 'ageDropdown', menu: 'ageMenu'}
-            ];
-
-            dropdowns.forEach(({ btn, menu }) => {
-            const dropdownBtn = document.getElementById(btn);
-            const dropdownMenu = document.getElementById(menu);
-
-            // 마우스 오버 시 해당 메뉴 보이기
-            dropdownBtn.addEventListener('mouseenter', () => {
-                dropdownMenu.style.display = "block";
-            });
-            });
-
-
-            // 드롭다운 선택을 베이스로 따라 이미지 변화시키기
-            function getSelectedImage(selectedItem, category) {
-                const imageMap = {
-                    // ... (your imageMap here)
-                };
-                if (category && imageMap[category]) {
-                    return imageMap[category][selectedItem];
-                } else {
-                    return imageMap[selectedItem];
-                }
-            }
-
-            // 드롭다운 선택 이벤트를 처리하는 함수
-            function handleDropdownSelection(dropdownId) {
-                const dropdown = document.getElementById(dropdownId);
-                const items = dropdown.querySelectorAll(".dropdown-item");
-
-                items.forEach(item => {
-                    item.addEventListener("click", function() {
-                        const btn = dropdown.querySelector(".dropdown-toggle");
-                        btn.textContent = this.textContent;
-                    });
-                });
-            }
-
-            // 각 드롭다운에 이벤트 리스너 추가
-            ["categoryDropdown", "themeDropdown", "personalityDropdown", "ageDropdown"].forEach(handleDropdownSelection);
-
-            let deleteCount = 0;
-
-            document.getElementById("deleteImage").addEventListener("click", function() {
-                deleteCount++;
-
-                if (deleteCount === 1) {
-                    const generatedImagesDiv = document.querySelector(".generated-images");
-                    while (generatedImagesDiv.firstChild) {
-                        generatedImagesDiv.removeChild(generatedImagesDiv.lastChild);
-                    }
-                } else if (deleteCount === 2) {
-                    const uploadImage = document.getElementById("uploadImage");
-                    uploadImage.src = "static/sample/upload.png";
-                    document.getElementById("imageUpload").value = "";
-                    deleteCount = 0;  // Reset the delete counter
-                }
-            });
-
-            // 애니메이션 랜덤 추천 기능 (드롭다운 밑 버튼을 누르면 작동?)
-            document.getElementById("checkRecommendedAnimation").addEventListener("click", function() {
-            const animationImages = [
-                'static/ch_image/Dao.png',
-                'static/ch_image/Pochacco.png',
-                'static/ch_image/Kuromi.png'
-            ];
-
-            function getRandomImage() {
-                const randomIndex = Math.floor(Math.random() * animationImages.length);
-                return animationImages[randomIndex];
-            }
-
-            const priorities = document.querySelectorAll(".priority-item img");
-
-            priorities.forEach((priority, index) => {
-                const randomImage = getRandomImage();
-                priority.src = randomImage;
-                priority.alt = `${index + 1}순위`;
-            });
-        });
-
-        // 랜덤으로 추천 애니메이션 추첨
-        let priorityImages = [
-            'static/ch_image/1.png',
-            'static/ch_image/2.png',
-            'static/ch_image/3.png'
-        ];
-
-        function getRandomImageFromPriority() {
-          const randomIndex = Math.floor(Math.random() * priorityImages.length);
-          const selectedImage = priorityImages[randomIndex];
-
-          // 중복을 방지하기 위해 선택된 이미지를 배열에서 제거
-          priorityImages.splice(randomIndex, 1);
-
-          return selectedImage;
-        }
-
-        document.getElementById("checkRecommendedAnimation").addEventListener("click", function() {
-          const animationImages = [
-            'static/ch_image/Dao.png',
-            'static/ch_image/Pochacco.png',
-            'static/ch_image/Kuromi.png'
-          ];
-
-          function getRandomImage() {
-            const randomIndex = Math.floor(Math.random() * animationImages.length);
-            return animationImages[randomIndex];
-          }
-
-          // 랜덤 이미지 배열 초기화
-          let tempPriorityImages = [...priorityImages];
-
-           for(let i = 0; i < tempPriorityImages.length; i++) {
-              let randomPriorityImage = getRandomImageFromPriority();
-              let compositeImage = combineImages(uploadedImageSrc, randomPriorityImage);
-              let imgElem = document.createElement('img');
-              imgElem.src = compositeImage;
-              imgElem.alt = `${i + 1}순위`;
-              imgElem.style.width = "300px";
-              imgElem.style.height ="300px";
-
-               generatedImagesDiv.appendChild(imgElem);
-           }
-
-           // 사용 후 원본 배열 복원
-           priorityImages= [...tempPriorityImages];
-        });
-
-
-
-              function combineImages(baseImage, overlayImage) {
-                // 간단한 이미지 합성 예시
-                // 실제 이미지 합성 작업은 HTML5 Canvas 또는 서버 측 로직을 이용해야 합니다.
-                // 이 예시에서는 두 이미지 URL을 연결하여 합성된 것처럼 보이게 합니다.
-                return baseImage + '+' + overlayImage;
-            }
-
-            function displayImage(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    // 여기서 'uploadImage' 대신 실제 이미지를 표시하려는 img 요소의 id를 사용하세요.
-                    document.getElementById('uploadImage').setAttribute('src', e.target.result);
-                }
-
-                reader.readAsDataURL(input.files[0]);
-                }
-            }
-        });
 
     </script>
 
@@ -552,179 +316,169 @@
 </head>
 
 <body>
-<!--헤더 부분-->
-<header class="header">
-    <h1>상품 X 애니메이션 콜라보 추천 AI 시스템</h1>
-</header>
+    <!--헤더 부분-->
+    <header class="header">
+        <h1>상품 X 애니메이션 콜라보 추천 AI 시스템</h1>
+    </header>
 
-<div class="wrapper">
+    <div class="wrapper">
+        <!--왼쪽 부분. -->
+        <div class="choose">
+            <div class="sidebar">
+                <form method="POST" action="/process">
+                    <!--  상품 선택  -->
+                    <div id="categoryDropdown" class="dropdown flex-container">
+                        <button id="categoryBtn" class="btn btn-secondary dropdown-toggle dropdown-btn">
+                            식품
+                        </button>
 
-    <div class="choose">
-        <div class="sidebar">
-            <!--  상품 선택  -->
-            <div id="categoryDropdown" class="dropdown flex-container">
-                <button id="categoryBtn" class="btn btn-secondary dropdown-toggle dropdown-btn" href="#" role="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                    식품
-                </button>
-
-                <ul id="dropdownMenu" class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">과자</a></li>
-                    <li><a class="dropdown-item" href="#">라면</a></li>
-                    <li><a class="dropdown-item" href="#">아이스크림</a></li>
-                    <li><a class="dropdown-item" href="#">젤리</a></li>
-                    <li><a class="dropdown-item" href="#">초콜릿</a></li>
-                    <li><a class="dropdown-item" href="#">사탕</a></li>
-                </ul>
-            </div>
-
-            <!-- 테마(분위기 선택) -->
-            <div id="themeDropdown" class="dropdown flex-container">
-                <button class="btn btn-secondary dropdown-toggle dropdown-btn" href="#" role="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                    테마1(분위기)
-                </button>
-
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">산뜻한</a></li>
-                    <li><a class="dropdown-item" href="#">귀여운</a></li>
-                    <li><a class="dropdown-item" href="#">도시적인</a></li>
-                    <li><a class="dropdown-item" href="#">발랄한</a></li>
-                    <li><a class="dropdown-item" href="#">통통 튀는</a></li>
-                    <li><a class="dropdown-item" href="#">...</a></li>
-                </ul>
-            </div>
-
-            <!-- 테마(성격 선택) -->
-            <div id="personalityDropdown" class="dropdown flex-container">
-                <button class="btn btn-secondary dropdown-toggle dropdown-btn" href="#" role="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                    테마2(성격)
-                </button>
-
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">친절한</a></li>
-                    <li><a class="dropdown-item" href="#">활발한</a></li>
-                    <li><a class="dropdown-item" href="#">장난끼 많은</a></li>
-                    <li><a class="dropdown-item" href="#">소심한</a></li>
-                    <li><a class="dropdown-item" href="#">깜찍한</a></li>
-                    <li><a class="dropdown-item" href="#">..</a></li>
-                </ul>
-            </div>
-
-            <!-- 나이 선택 -->
-            <div id="ageDropdown" class="dropdown flex-container">
-                <button class="btn btn-secondary dropdown-toggle dropdown-btn" href="#" role="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                    나이
-                </button>
-
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">10대</a></li>
-                    <li><a class="dropdown-item" href="#">20대</a></li>
-                    <li><a class="dropdown-item" href="#">30대</a></li>
-                    <li><a class="dropdown-item" href="#">40대</a></li>
-                </ul>
-            </div>
-            <button id="checkRecommendedAnimation" style="border-radius: 50px;">콜라보 생성</button>
-            <div class="btn-container" style="border-radius: 20px">
-                <button id="generatedImageBtn" style="border-radius: 50px;">합성예상</button>
-                <button type="submit" id="uploadingImage" style="border-radius: 50px;">업로드</button>
-                <button id="deleteImage" style="border-radius: 50px;">삭제</button>
-
-            </div>
-        </div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <div>
-            <div class="team_name">제 3조</div>
-            <p>LIU WEINA</p>
-            <p>박정연</p>
-            <p>김찬서</p>
-        </div>
-
-    </div>
-
-    <div style="background-color: #E6E2FF;">
-        <div class="maincon">
-            <!--이미지 업로드 부분. 원하시는 이미지를 넣어주세요.-->
-            <div class="image-up">
-                <div class="image-upload-section">
-                    <div class="title1">
-                        <h2>[이미지 업로드]</h2>
+                        <select class="form-select" id="food-categorySelect" name="food">
+                            {% for food in productFood %}
+                            <option value="{{food}}">{{food}}</option>
+                            {% endfor %}
+                        </select>
                     </div>
-                    <label for="imageUpload" style="cursor: pointer">
-                        <img id="uploadImage" src="static/sample/upload.png" alt="Upload Image"
-                             style="width:300px; height:300px; border: 1px;">
-                    </label>
-                    <!--            <form method="POST" enctype="multipart/form-data">-->
-                    <input type="file" id="imageUpload" name="file" style="display: none;"
-                           onchange="displayImage(this)">
 
-                    <!--            </form>-->
-                    <div>
-                        <img id="imagePreview" style="display:none; max-width:200px; border: 1px;">
+                    <!-- 테마(분위기 선택) -->
+                    <div id="themeDropdown" class="dropdown flex-container">
+                        <button class="btn btn-secondary dropdown-toggle dropdown-btn">
+                            테마1(분위기)
+                        </button>
+
+                        <select class="form-select" id="foodinfo-categorySelect" name="food_info">
+                            {% for food_info in productFoodInfo %}
+                            <option value="{{food_info}}">{{food_info}}</option>
+                            {% endfor %}
+                        </select>
                     </div>
+
+                    <!-- 테마(성격 선택) -->
+                    <div id="personalityDropdown" class="dropdown flex-container">
+                        <button class="btn btn-secondary dropdown-toggle dropdown-btn">
+                            테마2(키워드)
+                        </button>
+
+                        <select class="form-select" id="foodinfo2-categorySelect" name="food_info2">
+                            {% for food_info2 in productFoodInfo2 %}
+                            <option value="{{food_info2}}">{{food_info2}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- 나이 선택 -->
+                    <div id="ageDropdown" class="dropdown flex-container">
+                        <button class="btn btn-secondary dropdown-toggle dropdown-btn">
+                            나이
+                        </button>
+
+                        <select class="form-select" id="age-categorySelect" name="age">
+                            {% for age in Age %}
+                            <option value="{{age}}">{{age}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="center">
+                        <input type="button" value="애니추천" id="process" class="btn btn-primary m-3"
+                               style="width:150px; border-radius: 50px; color: #000000; background-color: #C4BDF2;">
+                    </div>
+                </form>
+                <div class="btn-container" style="border-radius: 20px">
+                    <input type="button" value="콜라보 생성" id="predict" class="btn btn-primary m-3"
+                           style="width:150px; border-radius: 50px; color: #000000; background-color: #C4BDF2;">
                 </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div>
+                <div class="team_name">(주)Pororo</div>
+                <p>LIU WEINA</p>
+                <p>박정연</p>
+                <p>김찬서</p>
+                <p>사업자번호:503-82-01234</p>
+                <p>contact@pororo.kr</p>
+                <p>개인정보처리방침</p>
+                <p>이용약관</p>
 
-                <div class="image-generated-section">
-                    <div>
-                        <div class="title2">
-                            <h2>[콜라보 업로드]</h2>
+            </div>
+
+        </div>
+
+        <div style="background-color: #E6E2FF;">
+            <div class="maincon">
+                <!--이미지 업로드 부분. 원하시는 이미지를 넣어주세요.-->
+                <div class="image-up">
+                    <div class="image-upload-section">
+                        <div class="title1">
+                            <h2>[상품 예시]</h2>
                         </div>
-                        <label for="imageGenerate" style="cursor: pointer">
-                            <img id="generatedImagePreview" src="static/sample/upload.png" alt="Generated Image"
-                                 style="width:300px; height:300px; border: 1px;">
+                        <label for="imageUpload" style="cursor: pointer">
+                            <img id="uploadImage" src="static/sample/upload.png" alt="Upload Image"
+                                style="width:300px; height:300px; border: 1px;">
                         </label>
+                        <!--            <form method="POST" enctype="multipart/form-data">-->
+                        <input type="file" id="imageUpload" name="file" style="display: none;"
+                            onchange="displayImage(this)">
+
+                        <!--            </form>-->
+                        <div>
+                            <img id="img4" style="display:none; max-width:200px; border: 1px;">
+                        </div>
+                    </div>
+
+                    <div class="image-generated-section">
+                        <div>
+                            <div class="title2">
+                                <h2>[콜라보 업로드]</h2>
+                            </div>
+                            <label for="imageGenerate" style="cursor: pointer">
+                                <img id="img5" src="static/sample/upload.png" alt="Generated Image"
+                                    style="width:300px; height:300px; border: 1px;">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="padding-left:35%; margin-top:10px; height: 70px">
+                <div style="display:inline;">
+
+                </div>
+                <div class="generated-images" style="display:inline;">
+                    <input type="file" id="imageGenerate" name="file" style="display: none;"
+                        onchange="displayImage(this)">
+                </div>
+            </div>
+        </div>
+
+
+        <div style="background-color: #FFFFFF">
+            <div class="gallery">
+                <div class="priority-item">
+                    <label>1순위 : <span id="txt1">{{ recommend[0] }}</span></label>
+                    <img src="{{ url_for('static', filename='ch_image/' ~ recommend[0] ~ '.JPG') }}" alt="1순위" id="img1">
+
+
+                    <div class="priority-item">
+                        <div class="priority-item">
+                            <label>2순위 : <span id="txt2">{{ recommend[1] }}</span></label>
+                            <img src="{{ url_for('static', filename='ch_image/' ~ recommend[1] ~ '.JPG') }}" alt="2순위" id="img2">
+                        </div>
+                    </div>
+
+                    <div class="priority-item">
+                        <label>3순위 : <span id="txt3">{{ recommend[2] }}</span></label>
+                        <img src="{{ url_for('static', filename='ch_image/' ~ recommend[2] ~ '.JPG') }}" alt="3순위" id="img3">
                     </div>
                 </div>
             </div>
         </div>
-        <div style="padding-left:35%; margin-top:10px; height: 70px">
-            <div style="display:inline;">
 
-            </div>
-            <div class="generated-images" style="display:inline;">
-                <input type="file" id="imageGenerate" name="file" style="display: none;"
-                       onchange="displayImage(this)">
-            </div>
-        </div>
+        <br>
+        <br>
+        <br>
     </div>
-
-
-    <div style="background-color: #FFFFFF">
-        <div class="gallery">
-            <div class="priority-item">
-                <label>1순위</label>
-                <img src="{{ url_for('static', filename='ch_image/Dao.png') }}" alt="1순위">
-            </div>
-
-
-            <div class="priority-item">
-                <div class="priority-item">
-                    <label>2순위</label>
-                    <img src="{{ url_for('static', filename='ch_image/Pochacco.png') }}" alt="2순위">
-                </div>
-            </div>
-
-            <div class="priority-item">
-                <label>3순위</label>
-                <img src="{{ url_for('static', filename='ch_image/Kuromi.png') }}" alt="3순위">
-            </div>
-        </div>
-    </div>
-</div>
-
-<br>
-<br>
-<br>
-
 </body>
 <!-- 푸터 구역-->
 <footer>
@@ -732,3 +486,64 @@
 </footer>
 
 </html>
+
+<script>
+    let gd = '';
+    let res0 = '';
+    let res1 = '';
+    let res2 = '';
+    let cnt = 0;
+
+    $('#food-categorySelect').click(function(){
+        let gd = $('#food-categorySelect').val();
+        $('#uploadImage').attr('src', `/static/gd_image/${gd}.JPG`);
+    });
+
+    $('#predict').click(function(){
+        console.log($('#food-categorySelect').val());
+        let gd = $('#food-categorySelect').val();
+        gd = gd ||'빵';
+
+        if (cnt%3==0)
+            $('#img5').attr('src', `/static/gd_ch_image/${gd}-${res0}.JPG`);
+        else if(cnt%3==1)
+            $('#img5').attr('src', `/static/gd_ch_image/${gd}-${res1}.JPG`);
+        else
+            $('#img5').attr('src', `/static/gd_ch_image/${gd}-${res2}.JPG`);
+        cnt++;
+    });
+
+    $('#process').click(function () {
+        var params = {
+            food: $("#food-categorySelect").val()
+            , foodinfo: $("#foodinfo-categorySelect").val()
+            , foodinfo2: $("#foodinfo2-categorySelect").val()
+            , age: $("#age-categorySelect").val()
+        }
+        // ajax 통신
+        $.ajax({
+            type: "POST",            // HTTP method type(GET, POST) 형식이다.
+            url: "/process",       // 컨트롤러에서 대기중인 URL 주소이다.
+            data: JSON.stringify(params),
+            contentType: 'application/json',
+            success: function (res) {  // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+                console.log(res);
+                $('#txt1').html(res[0]);
+                $('#txt2').html(res[1]);
+                $('#txt3').html(res[2]);
+
+                res0 = res[0];
+                res1 = res[1];
+                res2 = res[2];
+
+                $('#img1').attr('src', `/static/ch_image/${res[0]}.JPG`);
+                $('#img2').attr('src', `/static/ch_image/${res[1]}.JPG`);
+                $('#img3').attr('src', `/static/ch_image/${res[2]}.JPG`);
+
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) { // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+                console.log("통신 실패.")
+            }
+        });
+    });
+</script>

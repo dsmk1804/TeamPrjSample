@@ -1,19 +1,20 @@
 from flask import Flask, Blueprint, render_template, request, redirect, url_for, jsonify
 from werkzeug.utils import secure_filename
-from flask_sqlalchemy import SQLAlchemy
+# from flask_sqlalchemy import SQLAlchemy
 import os
 import pandas as pd
-from selenium import webdriver
-from selenium.webdriver.common.by import By
+# from selenium import webdriver
+# from selenium.webdriver.common.by import By
+import ex04
 
 app = Flask(__name__)
 
 # 데이터베이스 설정
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqldb://root:1234@localhost:3306/kcs'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db = SQLAlchemy(app, engine_options={"connect_args": {"charset": "utf8"}})
-
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqldb://root:1234@localhost:3306/kcs'
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+#
+# db = SQLAlchemy(app, engine_options={"connect_args": {"charset": "utf8"}})
+#
 page_bp = Blueprint('match', __name__, url_prefix='/')
 
 # 파일 업로드
@@ -25,14 +26,14 @@ def file_upload():
             filename = secure_filename(f.filename)
             f.save('static/uploads/' + filename)
 
-            try:
-                with db.engine.connect() as conn:
-                    # 파일명과 파일경로를 데이터베이스에 저장함
-                    sql = "INSERT INTO images (image_name, image_dir) VALUES (%s, %s)"
-                    conn.execute(sql, (secure_filename(f.filename), 'uploads/' + filename))
-                return '파일 업로드가 성공했습니다'
-            except Exception as e:
-                return 'uploads failed'
+            # try:
+            #     with db.engine.connect() as conn:
+            #         # 파일명과 파일경로를 데이터베이스에 저장함
+            #         sql = "INSERT INTO images (image_name, image_dir) VALUES (%s, %s)"
+            #         conn.execute(sql, (secure_filename(f.filename), 'uploads/' + filename))
+            #     return '파일 업로드가 성공했습니다'
+            # except Exception as e:
+            #     return 'uploads failed'
         else:
             return 'No file uploaded'
 
@@ -78,7 +79,36 @@ def upload_file():
             # 파일 저장
             uploaded_file.save(file_path)
             return 'File uploaded successfully!'
-    return render_template('index.html')
+
+    productFood = ex04.getProductFood()
+    productFoodInfo = ex04.getProductFoodInfo()
+    productFoodInfo2 = ex04.getProductFoodInfo2()
+    Age = ex04.getAge()
+    recommend = process()
+    return render_template('index.html', productFood=productFood, productFoodInfo=productFoodInfo, productFoodInfo2=productFoodInfo2, Age=Age, recommend=recommend)
+
+@app.route('/process', methods=['POST'])
+def process():
+    if request.method == 'POST':
+        data = request.get_json()
+        food = data['food']
+        food_info = data['foodinfo']
+        food_info2 = data['foodinfo2']
+        age = data['age']
+
+        if(age == '10대'):
+            age = "초등학생 아이 꼬마 아동 여름방학"
+        if(age == '20대'):
+            age = "학교 여름방학"
+        else:
+            age = "가족 집"
+
+        food_info1 = [food_info, food_info2, age]
+        animes = ex04.similar_animes(product_info=food_info1)
+        recommend = ex04.recommend_anime(product_index=food, similar_anime_indices=animes)
+    else:
+        recommend = "No recommendation available"
+    return jsonify(recommend)
 
 app.register_blueprint(page_bp)
 
