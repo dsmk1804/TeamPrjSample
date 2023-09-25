@@ -1,0 +1,494 @@
+:root {
+  --point-color: #63a9c4;
+  --bg-light-gray: #eeeeee;
+  --text-color-dark-grey: #1b1b1b;
+  --line-light-grey: #cbcbcb;
+
+  --bg-white: #fff;
+  --bg-footer: rgb(247, 247, 247);
+
+  --text-color-grey: rgb(181, 181, 181);
+  --text-color-red: #fa622f;
+}
+
+* {
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+html {
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+body {
+  position: relative;
+  margin: 0 auto;
+  box-sizing: border-box;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  color: var(--text-color-dark-grey);
+}
+
+a {
+  color: var(--text-color-dark-grey);
+}
+
+input[type="submit"] {
+  cursor: pointer;
+}
+
+.add-info-rover-Btn svg {
+  cursor: pointer;
+}
+
+/* 텍스트 스타일 */
+
+.txt-tit-sty {
+  font-weight: 700;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 33px;
+  text-align: center;
+  color: var(--text-color-dark-grey);
+  letter-spacing: -2.3px;
+}
+
+.txt-tit-thin {
+  font-weight: 400;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 31px;
+  text-align: center;
+  letter-spacing: -2px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+/* 탑 네비게이션 */
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 3px 4px 0px;
+  width: 100%;
+  z-index: 9999;
+  background-color: var(--bg-white);
+}
+
+.top-nav-wrap {
+  position: relative;
+  width: 1024px;
+  height: 76px;
+  margin: 0px auto;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.top-logo {
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.top-logo a {
+  color: var(--point-color);
+}
+
+.main-nav {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.main-nav li a {
+  margin-left: 40px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.8px;
+}
+
+/* 메인 콘텐츠 */
+/* 사용자 입력 폼 화면 */
+.main-content {
+  display: block;
+  margin-top: 76px;
+}
+
+.section-1-form {
+  position: relative;
+  height: 390px;
+  width: 1024px;
+  margin: 0px auto;
+  padding-top: 145px;
+}
+
+.sec-tit-fir {
+  margin-bottom: 20px;
+}
+
+.input-form-box {
+  margin-top: 112px;
+  margin-bottom: 135px;
+}
+
+.form-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-box {
+  width: 345px;
+  margin-right: 4px;
+}
+
+.input-box-in {
+  position: relative;
+}
+
+.input-box-sty {
+  width: 100%;
+  height: 57px;
+  padding: 0px 11px 1px 15px;
+  border-radius: 10px;
+  border: 1px solid rgb(221, 221, 221);
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: -1px;
+  color: var(--text-color-dark-grey);
+  outline: none;
+  box-sizing: border-box;
+}
+
+.submit-Btn-box {
+  width: 110px;
+}
+
+.submit-Btn-box-in {
+  position: relative;
+}
+
+.submit-Btn-sty {
+  width: 100%;
+  height: 57px;
+  padding: 0px 11px 1px 15px;
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--bg-white);
+  outline: none;
+  box-sizing: border-box;
+  background-color: var(--point-color);
+}
+
+/* 날짜 정보 받아오는 섹션 */
+.section-2 {
+  position: relative;
+  margin: 0px auto;
+  height: 600px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+#video-background {
+  position: absolute;
+  margin: 0 auto;
+  height: 600px;
+  width: 100%;
+  object-fit: cover;
+  z-index: -10;
+}
+
+.section-2-wrapper {
+  padding-top: 135px;
+  padding-bottom: 135px;
+
+  color: var(--bg-white);
+}
+
+.date-weather-box {
+  margin: 0px auto;
+}
+
+.date-weather-box li:first-child {
+  margin-bottom: 16px;
+}
+
+.temper-space-wrap {
+  position: relative;
+}
+
+.temper-space {
+  display: flex;
+  justify-content: center;
+  margin-top: 47px;
+  margin-bottom: 47px;
+}
+
+.temperature-sty {
+  position: relative;
+  font-size: 80px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 400;
+  letter-spacing: -5px;
+  text-align: center;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.temper-info-text {
+  display: none;
+  position: absolute;
+  margin-left: 15px;
+  top: 2px;
+  width: 160px;
+}
+
+.tem-info-sty {
+  background: var(--bg-white);
+  padding: 15px;
+  border: 1px solid var(--text-color-dark-grey);
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  color: var(--text-color-dark-grey);
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+  line-height: 140%;
+  letter-spacing: -1px;
+}
+
+.section-3 {
+  position: relative;
+  margin: 0px auto;
+  padding-top: 135px;
+  padding-bottom: 135px;
+  width: 1024px;
+}
+
+.sec-3-tit {
+  margin-bottom: 100px;
+}
+
+.sec-3-tit ul {
+  display: flex;
+  justify-content: center;
+}
+
+.sec-3-tit ul li:not(:first-child) {
+  margin-left: 12px;
+}
+
+.sec-3-tit ul li {
+  font-weight: 300;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 31px;
+  text-align: center;
+  letter-spacing: -2px;
+}
+
+.sec-3-cir-sumnails {
+  display: flex;
+  justify-content: space-between;
+  width: 820px;
+  margin: 0 auto;
+  padding-bottom: 135px;
+}
+
+.cir-img-box {
+  width: 190px;
+  height: 190px;
+  background-color: var(--bg-light-gray);
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.cir-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sec-shop-link-sum {
+  margin-right: 20px;
+  padding-top: 50px;
+}
+
+.round-rec-img-box {
+  width: 260px;
+  height: 395px;
+  background-color: var(--bg-light-gray);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.round-rec-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.shop-link-Btn-sty {
+  width: 260px;
+  height: 45px;
+  border: 1px solid var(--line-light-grey);
+  border-radius: 10px;
+  margin-top: 7px;
+}
+
+.shop-link-Btn-sty a {
+  font-size: 16px;
+  color: #9e9e9e;
+}
+
+.product-recommend-info-box {
+  position: relative;
+  padding-top: 14px;
+}
+
+.product-name {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+  margin-bottom: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  letter-spacing: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.discount-rate {
+  line-height: 1.5;
+}
+
+.discount-rate-tex {
+  font-size: 16px;
+  font-weight: 700;
+  white-space: nowrap;
+
+  color: var(--text-color-red);
+}
+
+.sales-price {
+  font-size: 16px;
+  font-weight: 700;
+  white-space: nowrap;
+  letter-spacing: -0.3px;
+}
+
+.dimmed-price {
+  padding-top: 1px;
+  line-height: 18px;
+}
+
+.dimmed-price-tex {
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: line-through;
+  color: var(--text-color-grey);
+  white-space: nowrap;
+}
+
+.hash-tag-sty {
+  font-size: 16px;
+  font-weight: 400;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  letter-spacing: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* footer */
+.www-footer {
+  width: 100%;
+  height: 100px;
+  background-color: var(--bg-footer);
+}
+
+.www-footer p {
+  height: 100px;
+  line-height: 100px;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text-color-grey);
+  text-align: center;
+}
+
+/* 스와이퍼 */
+.swiper-wrapper {
+  position: relative;
+  width: 820px;
+  margin: 0px auto;
+}
+
+.swiper-wrap-again {
+  width: 820px;
+  margin: 0px auto;
+  overflow: hidden;
+}
+
+.swiper-container {
+  position: relative;
+  width: 820px;
+  margin: 0px auto;
+  display: flex;
+
+  transition: transform 0.3s ease-in-out;
+}
+
+.swiper-slide {
+  width: 820px;
+  touch-action: pan-y;
+  position: relative;
+  padding: 0;
+  z-index: 1;
+  display: flex;
+  flex-shrink: 0;
+}
+
+.swiper-button-prev {
+  position: absolute;
+  z-index: 100;
+  border: none;
+  outline: none;
+  width: 60px;
+  height: 60px;
+  background: url(/images/icons/nextpre-Btn.svg) center center no-repeat;
+  top: 250px;
+  left: 0;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.swiper-button-next {
+  position: absolute;
+  z-index: 100;
+  border: 0px;
+  outline: 0px;
+  width: 60px;
+  height: 60px;
+  background: url(/images/icons/nextpre-Btn.svg) no-repeat;
+  top: 250px;
+  right: 0px;
+  transform: translate(50%, -50%) rotate(180deg);
+}
+
+@media all and (max-width: 1024px) {
+  .section-2 {
+    width: 1024px;
+  }
+
+  #video-background {
+    width: 1024px;
+  }
+
+  .www-footer {
+    width: 1024px;
+  }
+}

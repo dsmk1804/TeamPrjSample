@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>이옷어때? :: 날씨에 맞는 옷차림을 알려드려요</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}" /> -->
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" /> -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&family=Noto+Serif+KR:wght@200;300;400;500;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+      
+    <style>
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed,
+        figure, figcaption, footer, header, hgroup,
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+        }
+
+        article, aside, details, figcaption, figure,
+        footer, header, hgroup, menu, nav, section {
+        display: block;
+        }
+        body {
+        line-height: 1;
+        }
+        ol, ul, li {
+        list-style: none;
+        }
+        blockquote, q {
+        quotes: none;
+        }
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+        content: '';
+        content: none;
+        }
+        table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        }
+
+        label,
+        button {
+        cursor: pointer;
+        border: 0;
+        background: none;
+        }
+
+        img {
+        max-width: 100%;
+        }
+
+        a {
+        text-decoration: none;
+        cursor: pointer;
+        }
+        
+        input[type="submit"] {
+          cursor: pointer;
+        }
+
+        .add-info-rover-Btn svg {
+          cursor: pointer;
+        }
+
+        * {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        vertical-align: baseline;
+        }
+        
+        :root {
+          --point-color: #63a9c4;
+          --bg-light-gray: #eeeeee;
+          --text-color-dark-grey: #1b1b1b;
+          --line-light-grey: #cbcbcb;
+
+          --bg-white: #fff;
+          --bg-footer: rgb(247, 247, 247);
+
+          --text-color-grey: rgb(181, 181, 181);
+          --text-color-red: #fa622f;
+        }
+
+        * {
+          font-family: "Noto Sans KR", sans-serif;
+        }
+
+        html {
+          font-family: "Noto Sans KR", sans-serif;
+        }
+
+        body {
+          position: relative;
+          margin: 0 auto;
+          box-sizing: border-box;
+          font-family: "Noto Sans KR", sans-serif;
+          font-weight: normal;
+          font-size: 14px;
+          color: var(--text-color-dark-grey);
+        }
+
+        a {
+          color: var(--text-color-dark-grey);
+        }
+
+        /* 텍스트 스타일 */
+
+        .txt-tit-sty {
+          font-weight: 700;
+          font-family: "Noto Sans KR", sans-serif;
+          font-size: 33px;
+          text-align: center;
+          color: var(--text-color-dark-grey);
+          letter-spacing: -2.3px;
+        }
+
+        .txt-tit-thin {
+          font-weight: 400;
+          font-family: "Noto Sans KR", sans-serif;
+          font-size: 31px;
+          text-align: center;
+          letter-spacing: -2px;
+          text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 탑 네비게이션 */
+        .top-nav {
+          position: fixed;
+          top: 0;
+          left: 0;
+          box-shadow: rgba(0, 0, 0, 0.05) 0px 3px 4px 0px;
+          width: 100%;
+          z-index: 9999;
+          background-color: var(--bg-white);
+        }
+
+        .top-nav-wrap {
+          position: relative;
+          width: 1024px;
+          height: 76px;
+          margin: 0px auto;
+          display: flex;
+          -webkit-box-align: center;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .top-logo {
+          font-size: 20px;
+          font-weight: 900;
+        }
+
+        .top-logo a {
+          color: var(--point-color);
+        }
+
+        .main-nav {
+          display: flex;
+          -webkit-box-align: center;
+          align-items: center;
+        }
+
+        .main-nav li a {
+          margin-left: 40px;
+          font-size: 15px;
+          font-weight: 600;
+          letter-spacing: -0.8px;
+        }
+
+        /* 메인 콘텐츠 */
+        /* 사용자 입력 폼 화면 */
+        .main-content {
+          display: block;
+          margin-top: 76px;
+        }
+
+        .section-1-form {
+          position: relative;
+          height: 390px;
+          width: 1024px;
+          margin: 0px auto;
+          padding-top: 145px;
+        }
+
+        .sec-tit-fir {
+          margin-bottom: 20px;
+        }
+
+        .input-form-box {
+          margin-top: 112px;
+          margin-bottom: 135px;
+        }
+
+        .form-box {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .input-box {
+          width: 345px;
+          margin-right: 4px;
+        }
+
+        .input-box-in {
+          position: relative;
+        }
+
+        .input-box-sty {
+          width: 100%;
+          height: 57px;
+          padding: 0px 11px 1px 15px;
+          border-radius: 10px;
+          border: 1px solid rgb(221, 221, 221);
+          font-weight: 400;
+          font-size: 16px;
+          letter-spacing: -1px;
+          color: var(--text-color-dark-grey);
+          outline: none;
+          box-sizing: border-box;
+        }
+
+        .submit-Btn-box {
+          width: 110px;
+        }
+
+        .submit-Btn-box-in {
+          position: relative;
+        }
+
+        .submit-Btn-sty {
+          width: 100%;
+          height: 57px;
+          padding: 0px 11px 1px 15px;
+          border-radius: 10px;
+          font-weight: 400;
+          font-size: 16px;
+          color: var(--bg-white);
+          outline: none;
+          box-sizing: border-box;
+          background-color: var(--point-color);
+        }
+
+        /* 날짜 정보 받아오는 섹션 */
+        .section-2 {
+          position: relative;
+          margin: 0px auto;
+          height: 600px;
+          width: 100%;
+          background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        #video-background {
+          position: absolute;
+          margin: 0 auto;
+          height: 600px;
+          width: 100%;
+          object-fit: cover;
+          z-index: -10;
+        }
+
+        .section-2-wrapper {
+          padding-top: 135px;
+          padding-bottom: 135px;
+
+          color: var(--bg-white);
+        }
+
+        .date-weather-box {
+          margin: 0px auto;
+        }
+
+        .date-weather-box li:first-child {
+          margin-bottom: 16px;
+        }
+
+        /* 코트 추가 수정 부분 : 시작 */
+
+        .temper-space-wrap {
+          position: relative;
+        }
+
+        .temper-space {
+          display: flex;
+          justify-content: center;
+          margin-top: 47px;
+          margin-bottom: 47px;
+        }
+
+        .temperature-sty {
+          position: relative;
+          font-size: 80px;
+          font-family: "Noto Sans KR", sans-serif;
+          font-weight: 400;
+          letter-spacing: -5px;
+          text-align: center;
+          text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+        }
+
+        .temper-info-text {
+          display: none;
+          position: absolute;
+          margin-left: 15px;
+          top: 2px;
+          width: 160px;
+        }
+
+        .tem-info-sty {
+          background: var(--bg-white);
+          padding: 15px;
+          border: 1px solid var(--text-color-dark-grey);
+          border-radius: 5px;
+          box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+          color: var(--text-color-dark-grey);
+          font-size: 12px;
+          font-weight: 500;
+          text-align: center;
+          line-height: 140%;
+          letter-spacing: -1px;
+        }
+
+        /* 코트 추가 수정 부분 : 끝 */
+
+        .section-3 {
+          position: relative;
+          margin: 0px auto;
+          padding-top: 135px;
+          padding-bottom: 135px;
+          width: 1024px;
+        }
+
+        .sec-3-tit {
+          margin-bottom: 100px;
+        }
+
+        .sec-3-tit ul {
+          display: flex;
+          justify-content: center;
+        }
+
+        .sec-3-tit ul li:not(:first-child) {
+          margin-left: 12px;
+        }
+
+        .sec-3-tit ul li {
+          font-weight: 300;
+          font-family: "Noto Sans KR", sans-serif;
+          font-size: 31px;
+          text-align: center;
+          letter-spacing: -2px;
+        }
+
+        .sec-3-cir-sumnails {
+          display: flex;
+          justify-content: space-between;
+          width: 820px;
+          margin: 0 auto;
+          padding-bottom: 135px;
+        }
+
+        .cir-img-box {
+          width: 190px;
+          height: 190px;
+          background-color: var(--bg-light-gray);
+          border-radius: 50%;
+          overflow: hidden;
+        }
+
+        .cir-img-box img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .sec-shop-link-sum {
+          margin-right: 20px;
+          padding-top: 50px;
+        }
+
+        .round-rec-img-box {
+          width: 260px;
+          height: 395px;
+          background-color: var(--bg-light-gray);
+          border-radius: 10px;
+          overflow: hidden;
+        }
+
+        .round-rec-img-box img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .shop-link-Btn-sty {
+          width: 260px;
+          height: 45px;
+          border: 1px solid var(--line-light-grey);
+          border-radius: 10px;
+          margin-top: 7px;
+        }
+
+        .shop-link-Btn-sty a {
+          font-size: 16px;
+          color: #9e9e9e;
+        }
+
+        .product-recommend-info-box {
+          position: relative;
+          padding-top: 14px;
+        }
+
+        .product-name {
+          font-size: 16px;
+          line-height: 1.5;
+          font-weight: 400;
+          margin-bottom: 5px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          letter-spacing: normal;
+          word-break: break-word;
+          overflow-wrap: break-word;
+        }
+
+        .discount-rate {
+          line-height: 1.5;
+        }
+
+        .discount-rate-tex {
+          font-size: 16px;
+          font-weight: 700;
+          white-space: nowrap;
+
+          color: var(--text-color-red);
+        }
+
+        .sales-price {
+          font-size: 16px;
+          font-weight: 700;
+          white-space: nowrap;
+          letter-spacing: -0.3px;
+        }
+
+        .dimmed-price {
+          padding-top: 1px;
+          line-height: 18px;
+        }
+
+        .dimmed-price-tex {
+          font-size: 14px;
+          font-weight: 400;
+          text-decoration: line-through;
+          color: var(--text-color-grey);
+          white-space: nowrap;
+        }
+
+        .hash-tag-sty {
+          font-size: 16px;
+          font-weight: 400;
+          margin-top: 10px;
+          margin-bottom: 10px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          letter-spacing: normal;
+          word-break: break-word;
+          overflow-wrap: break-word;
+        }
+
+        /* footer */
+        .www-footer {
+          width: 100%;
+          height: 100px;
+          background-color: var(--bg-footer);
+        }
+
+        .www-footer p {
+          height: 100px;
+          line-height: 100px;
+          font-size: 15px;
+          font-weight: 400;
+          color: var(--text-color-grey);
+          text-align: center;
+        }
+
+        /* 스와이퍼 */
+        .swiper-wrapper {
+          position: relative;
+          width: 820px;
+          margin: 0px auto;
+        }
+
+        .swiper-wrap-again {
+          width: 820px;
+          margin: 0px auto;
+          overflow: hidden;
+        }
+
+        .swiper-container {
+          position: relative;
+          width: 820px;
+          margin: 0px auto;
+          display: flex;
+
+          transition: transform 0.3s ease-in-out;
+        }
+
+        .swiper-slide {
+          width: 820px;
+          touch-action: pan-y;
+          position: relative;
+          padding: 0;
+          z-index: 1;
+          display: flex;
+          flex-shrink: 0;
+        }
+        
+        .swiper-button-prev {
+            position: absolute;
+            z-index: 100;
+            border: none;
+            outline: none;
+            width: 60px;
+            height: 60px;
+            background: url("{{ url_for('static', filename='images/icons/nextpre-Btn.svg') }}") center center no-repeat;
+            top: 250px;
+            left: 0;
+            transform: translateX(-50%) translateY(-50%);
+        }
+
+        .swiper-button-next {
+            position: absolute;
+            z-index: 100;
+            border: 0px;
+            outline: 0px;
+            width: 60px;
+            height: 60px;
+            background: url("{{ url_for('static', filename='images/icons/nextpre-Btn.svg') }}") no-repeat;
+            top: 250px;
+            right: 0px;
+            transform: translate(50%, -50%) rotate(180deg);
+        }
+    </style>
+  </head>
+
+  <body>
+    <header class="top-nav">
+      <div class="top-nav-wrap">
+        <div class="top-logo">
+          <a href="#sectionFir">이옷어때?</a>
+        </div>
+        <div>
+          <ul class="main-nav">
+            <li><a href="#sectionFir">이옷어때?</a></li>
+            <li><a href="#sectionSec">날씨정보</a></li>
+            <li><a href="#sectionThi">기온별 옷차림</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-content">
+      <div id="sectionFir" class="section-1-form">
+        <div class="sec-1-tit txt-tit-sty">
+          <div class="sec-tit-fir">원하는 날짜와 지역을 입력하시면</div>
+          <div>날씨에 맞는 옷차림을 알려 드릴게요.</div>
+        </div>
+        <div class="input-form-box">
+          <form method="POST" action="/" class="form-box">
+            <div class="input-box">
+              <div class="input-box-in">
+                <input
+                  type="text"
+                  name="location"
+                  id="location"
+                  required
+                  placeholder="원하는 지역을 입력해 주세요. 예: 대구"
+                  class="input-box-sty"
+                />
+              </div>
+            </div>
+            <div class="input-box">
+              <div class="input-box-in">
+                <div class="date-input">
+                  <input
+                    type="date"
+                    name="date"
+                    id="date-input"
+                    required
+                    class="input-box-sty"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="submit-Btn-box">
+              <div class="submit-Btn-box-in">
+                <input type="submit" value="전송하기" class="submit-Btn-sty" />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div id="sectionSec" class="section-2">
+        <video autoplay muted loop id="video-background">
+          <source
+            src="{{ url_for('static', filename='images/bg/' ~ wf_filename ~ '.mp4') }}"
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>        
+          
+        <div class="section-2-wrapper">
+        {% for forecast in forecast_data %}
+          <div class="date-weather-box txt-tit-thin">
+            <li>{{ forecast['날짜'] }}</li>
+            <li>{{ forecast['지역'] }} 날씨</li>
+          </div>
+            
+         <div class="temper-space-wrap">
+
+          <div class="temper-space">
+            <div class="temperature-sty">{{ forecast['평균온도'] }}°C</div>
+             <div class="add-info-rover-Btn">
+              <svg width="14" height="20" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M6.9932 0.700195C8.73506 0.700195 10.3116 1.40557 11.4528 2.54565C12.5943 3.68594 13.3002 5.26111 13.3002 7.0002C13.3002 8.73928 12.5943 10.3145 11.4528 11.4547C10.3116 12.5948 8.73506 13.3002 6.9932 13.3002C5.25512 13.3002 3.68233 12.595 2.54387 11.4554C1.40457 10.315 0.700195 8.73952 0.700195 7.0002C0.700195 5.26087 1.40457 3.68541 2.54387 2.54497C3.68233 1.40537 5.25512 0.700195 6.9932 0.700195Z"
+                  stroke="#ccc" stroke-width="1.4"></path>
+                <path
+                  d="M4.5 5.21081H5.77027C5.81351 4.55135 6.26216 4.12973 6.95946 4.12973C7.64054 4.12973 8.09459 4.53514 8.09459 5.0973C8.09459 5.58784 7.90383 5.86944 7.35576 6.22524L7.1973 6.32432C6.45135 6.76216 6.13784 7.24865 6.18649 8.05946L6.19189 8.42703H7.44595V8.11892C7.44595 7.58378 7.64595 7.30811 8.35405 6.89189C9.08919 6.45405 9.5 5.87568 9.5 5.04865C9.5 3.85405 8.51081 3 7.02973 3C5.42432 3 4.54324 3.92973 4.5 5.21081ZM6.87838 11.0054C6.33784 11.0054 5.98108 10.6649 5.98108 10.1459C5.98108 9.62162 6.33784 9.28108 6.87838 9.28108C7.42973 9.28108 7.77568 9.62162 7.77568 10.1459C7.77568 10.6649 7.42973 11.0054 6.87838 11.0054Z"
+                  fill="#ccc"></path>
+              </svg>
+
+              <div class="temper-info-text tem-info-sty">
+                해당 날짜의 최고 온도 최저 온도를 기준으로 한 평균 온도입니다.
+              </div>
+             </div>
+           </div>
+         </div>
+            
+          <div class="date-weather-box txt-tit-thin">
+            <li>{{ forecast['날씨'] }}</li>
+            <li>최저: {{ forecast['최저온도'] }}°C 최고: {{ forecast['최고온도'] }}°C</li>
+          </div>
+        {% endfor %}        
+        </div>
+      </div>
+
+      <div id="sectionThi" class="section-3">
+        <div class="sec-3-tit txt-tit-sty">
+          <div class="sec-tit-fir">이런 옷차림 어때요?</div>
+          <div>
+            <ul>
+            {% if recomm_data %}
+              <li>{{ (recomm_data)[0] }},</li>
+              <li>{{ (recomm_data)[1] }},</li>
+              <li>{{ (recomm_data)[2] }},</li>
+              <li>{{ (recomm_data)[-1] }}</li>
+            {% else %}
+              <li>No data available</li>
+            {% endif %}
+            </ul>
+          </div>
+        </div>
+
+        <div class="sec-3-cir-sumnails">
+          <div class="cir-img-box">
+            <img src="{{ url_for('static', filename='images/icons/' ~ recomm_filename[0] ~ '.png') }}" alt="웃옷" />
+          </div>
+          <div class="cir-img-box">
+            <img src="{{ url_for('static', filename='images/icons/' ~ recomm_filename[1] ~ '.png') }}" alt="윗옷" />
+          </div>
+          <div class="cir-img-box">
+            <img src="{{ url_for('static', filename='images/icons/' ~ recomm_filename[2] ~ '.png') }}" alt="하의" />
+          </div>
+          <div class="cir-img-box">
+            <img src="{{ url_for('static', filename='images/icons/' ~ recomm_filename[-1] ~ '.png') }}" alt="악세서리" />
+          </div>
+        </div>
+
+        <div class="sec-shop-link">
+          <div class="txt-tit-sty">추천 스타일</div>
+          <div class="swiper-wrapper">
+            <div class="swiper-wrap-again">
+              <div class="swiper-container">
+                <!-- 첫번째 슬라이드 -->
+                <div class="swiper-slide">
+                  <!-- img-box-01 -->
+                  <div class="sec-shop-link-sum">
+                    <div class="round-rec-img-box">
+                      <img
+                        src="{{ url_for('static', filename='images/img_recommend/shop_sum_01.png') }}"
+                        alt="달트 쇼핑몰의 케이시 스커트 제품"
+                      />
+                    </div>
+                    <div class="product-recommend-info-box">
+                      <h3 class="product-name">[DOLTTI] 케이시 스커트</h3>
+                      <div>
+                        <div>
+                          <div class="discount-rate">
+                            <span class="discount-rate-tex">30%</span>
+                            <span class="sales-price">10,710원</span>
+                          </div>
+                          <div class="dimmed-price">
+                            <span class="dimmed-price-tex">15,300원</span>
+                          </div>
+                          <div class="review-count">
+                            <div class="hash-tag-sty">
+                              #모던시크 #심플베이직
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="button" class="shop-link-Btn-sty">
+                        <a href="https://daltt.co.kr/" target="_blank"
+                          >구매하러 가기 GO!</a
+                        >
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- img-box-02 -->
+                  <div class="sec-shop-link-sum">
+                    <div class="round-rec-img-box">
+                      <img
+                        src="{{ url_for('static', filename='images/img_recommend/shop_sum_02.png') }}"
+                        alt="저스트온 히브 메탈장식 7부 맨투맨티"
+                      />
+                    </div>
+                    <div class="product-recommend-info-box">
+                      <h3 class="product-name">[JUSTONE] 케이시 스커트</h3>
+                      <div>
+                        <div>
+                          <div class="discount-rate">
+                            <span class="discount-rate-tex">30%</span>
+                            <span class="sales-price">10,710원</span>
+                          </div>
+                          <div class="dimmed-price">
+                            <span class="dimmed-price-tex">15,300원</span>
+                          </div>
+                          <div class="review-count">
+                            <div class="hash-tag-sty">
+                              #러블리 #유니크 #심플베이직
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="button" class="shop-link-Btn-sty">
+                        <a
+                          href="https://www.justone.co.kr/shop/shopdetail.html?branduid=86619&xcode=035&mcode=000&scode=&GfDT=bmh3Vw%3D%3D"
+                          target="_blank"
+                          >구매하러 가기 GO!</a
+                        >
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- img-box-03 -->
+                  <div class="sec-shop-link-sum">
+                    <div class="round-rec-img-box">
+                      <img
+                        src="{{ url_for('static', filename='images/img_recommend/shop_sum_03.png') }}"
+                        alt="샌더 9부 오버핏 셔츠"
+                      />
+                    </div>
+                    <div class="product-recommend-info-box">
+                      <h3 class="product-name">
+                        [MAYBLUE] 샌더 9부 오버핏 셔츠
+                      </h3>
+                      <div>
+                        <div>
+                          <div class="discount-rate">
+                            <span class="discount-rate-tex">30%</span>
+                            <span class="sales-price">10,710원</span>
+                          </div>
+                          <div class="dimmed-price">
+                            <span class="dimmed-price-tex">15,300원</span>
+                          </div>
+                          <div class="review-count">
+                            <div class="hash-tag-sty">#러블리 #모던 #시크</div>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="button" class="shop-link-Btn-sty">
+                        <a
+                          href="https://mayblue.co.kr/shop/shopdetail.html?branduid=179986&xcode=099&mcode=002&scode=&special=1&GfDT=Z2V8Vg%3D%3D"
+                          target="_blank"
+                          >구매하러 가기 GO!</a
+                        >
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 두번째 슬라이드 -->
+                <div class="swiper-slide">
+                  <!-- img-box-01 -->
+                  <div class="sec-shop-link-sum">
+                    <div class="round-rec-img-box">
+                      <img
+                        src="{{ url_for('static', filename='images/img_recommend/shop_sum_04.png') }}"
+                        alt="MISSHOP 피오니 블라우스 자켓"
+                      />
+                    </div>
+                    <div class="product-recommend-info-box">
+                      <h3 class="product-name">
+                        [MISSHOP] 피오니 블라우스 자켓
+                      </h3>
+                      <div>
+                        <div>
+                          <div class="discount-rate">
+                            <span class="discount-rate-tex">30%</span>
+                            <span class="sales-price">10,710원</span>
+                          </div>
+                          <div class="dimmed-price">
+                            <span class="dimmed-price-tex">15,300원</span>
+                          </div>
+                          <div class="review-count">
+                            <div class="hash-tag-sty">
+                              #페미닌 #심플 #베이직
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="button" class="shop-link-Btn-sty">
+                        <a
+                          href="https://www.minsshop.com/product/%EB%A9%B4100%ED%94%BC%EC%98%A4%EB%8B%88-%EB%B8%94%EB%9D%BC%EC%9A%B0%EC%8A%A4-%EC%9E%90%EC%BC%93/19673/category/1/display/4/"
+                          target="_blank"
+                          >구매하러 가기 GO!</a
+                        >
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- img-box-02 -->
+                  <div class="sec-shop-link-sum">
+                    <div class="round-rec-img-box">
+                      <img
+                        src="{{ url_for('static', filename='images/img_recommend/shop_sum_05.png') }}"
+                        alt="COCOBLACK 마스 니트vest"
+                      />
+                    </div>
+                    <div class="product-recommend-info-box">
+                      <h3 class="product-name">[COCOBLACK] 마스 니트vest</h3>
+                      <div>
+                        <div>
+                          <div class="discount-rate">
+                            <span class="discount-rate-tex">30%</span>
+                            <span class="sales-price">10,710원</span>
+                          </div>
+                          <div class="dimmed-price">
+                            <span class="dimmed-price-tex">15,300원</span>
+                          </div>
+                          <div class="review-count">
+                            <div class="hash-tag-sty">
+                              #럭셔리 #명품 #미시스타일
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="button" class="shop-link-Btn-sty">
+                        <a
+                          href="https://cocoblack.kr/shop/shopdetail.html?branduid=180424&xcode=014&mcode=004&scode=&special=5&GfDT=bmx1W18%3D"
+                          target="_blank"
+                          >구매하러 가기 GO!</a
+                        >
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- img-box-03 -->
+                  <div class="sec-shop-link-sum">
+                    <div class="round-rec-img-box">
+                      <img
+                        src="{{ url_for('static', filename='images/img_recommend/shop_sum_06.png') }}"
+                        alt="지앤패치 비스코스골지니트"
+                      />
+                    </div>
+                    <div class="product-recommend-info-box">
+                      <h3 class="product-name">
+                        [CLICK&FUNNY] 지앤패치 골지니트
+                      </h3>
+                      <div>
+                        <div>
+                          <div class="discount-rate">
+                            <span class="discount-rate-tex">30%</span>
+                            <span class="sales-price">10,710원</span>
+                          </div>
+                          <div class="dimmed-price">
+                            <span class="dimmed-price-tex">15,300원</span>
+                          </div>
+                          <div class="review-count">
+                            <div class="hash-tag-sty">
+                              #러블리 #심플 #베이직
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="button" class="shop-link-Btn-sty">
+                        <a
+                          href="https://www.clicknfunny.com/shop/shopdetail.html?branduid=71228&xcode=016&mcode=001&scode=&special=6&GfDT=a2x3Uw%3D%3D"
+                          target="_blank"
+                          >구매하러 가기 GO!</a
+                        >
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="swiper-button-prev"
+              onclick="prevSlide()"
+            ></button>
+            <button
+              type="button"
+              class="swiper-button-next"
+              onclick="nextSlide()"
+            ></button>
+          </div>
+          <!-- swiper-wrapper -->
+        </div>
+        <!-- sec-shop-link -->
+      </div>
+      <!-- section-3 -->
+    </div>
+    <!-- main-content -->
+
+    <footer class="www-footer">
+      <p>&copy;KB-Team Double-U All rights reserved.</p>
+    </footer>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/swiper.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/smooth-scroll.js') }}"></script>
+    <script>   
+      var threeDayLater = new Date();
+      threeDayLater.setDate(threeDayLater.getDate() + 3);
+      var threeDayLaterString = threeDayLater.toISOString().split("T")[0];
+        
+      var oneWeekLater = new Date();
+      oneWeekLater.setDate(oneWeekLater.getDate() + 10);
+      var oneWeekLaterString = oneWeekLater.toISOString().split("T")[0];
+    
+      var dateInput = document.getElementById("date-input");
+    
+      dateInput.setAttribute("min", threeDayLaterString);
+      dateInput.setAttribute("max", oneWeekLaterString);
+        
+    
+      const addInfoBtn = document.querySelector('.add-info-rover-Btn');
+      const temperInfoText = document.querySelector('.temper-info-text');
+
+      addInfoBtn.addEventListener('mouseover', () => {
+          temperInfoText.style.display = 'block';
+      });
+  
+      addInfoBtn.addEventListener('mouseout', () => {
+          temperInfoText.style.display = 'none';
+      });
+    </script>
+  </body>
+</html>
